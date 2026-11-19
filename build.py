@@ -49,19 +49,18 @@ def read(p):
 
 def card(lang, rel_path, m, start):
     t = T[lang]; href = start + rel_path
-    return (f'<article class="card post-card"><div class="post-meta">{t["date"](m["date"])} · {m.get("read", 5)} {t["read"]}</div>'
-            f'<h3><a href="{href}">{html.escape(m["title"])}</a></h3><p>{html.escape(m["description"])}</p>'
-            f'<a class="more" href="{href}" aria-label="{t["more"]}: {html.escape(m["title"])}">{t["more"]} →</a></article>')
+    return (f'<li><a href="{href}"><time datetime="{m["date"]}">{t["date"](m["date"])}</time>'
+            f'<div><h3>{html.escape(m["title"])}</h3><p>{html.escape(m["description"])}</p></div></a></li>')
 
 def post_body(lang, out, m, body, posts, start):
     t = T[lang]
-    upd = f' · {t["updated"]} {t["date"](m["updated"])}' if m.get("updated", m["date"]) != m["date"] else ""
+    upd = f', {t["updated"]} {t["date"](m["updated"])}' if m.get("updated", m["date"]) != m["date"] else ""
     others = "".join(card(lang, rp, mm, start) for o, rp, mm in posts[lang] if o != out)
     tags = "".join(f'<span class="tag">{html.escape(x)}</span>' for x in m.get("tags", []))
     return f'''<article class="wrap post">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="{start}">{t["home"]}</a> › <a href="{start}blog/">Blog</a></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="{start}">{t["home"]}</a> / <a href="{start}blog/">Blog</a></nav>
   <header class="post-head">
-    <div class="post-meta">{t["date"](m["date"])}{upd} · {m.get("read", 5)} {t["read"]} · {t["by"]}</div>
+    <div class="post-meta">{t["date"](m["date"])}{upd}, {m.get("read", 5)} {t["read"]}, {t["by"]}</div>
     <h1>{html.escape(m["title"])}</h1>
     <p class="lead">{html.escape(m.get("lead", m["description"]))}</p>
     <div class="tags">{tags}</div>
@@ -71,7 +70,7 @@ def post_body(lang, out, m, body, posts, start):
   </div>
   <aside class="post-cta"><h2>{t["cta_h"]}</h2><p>{t["cta_p"]}</p><a class="btn pri" href="{start}#{t["anchor"]}">{t["cta_b"]}</a></aside>
 </article>
-<section class="sec alt"><div class="wrap"><div class="sec-head"><h2>{t["related"]}</h2></div><div class="grid">{others}</div></div></section>'''
+<section class="related"><div class="wrap"><h2>{t["related"]}</h2><ul class="posts">{others}</ul></div></section>'''
 
 def render(lang, out, m, body, posts):
     t = T[lang]; r = "../" * out.count("/"); start = r + ("" if lang == "de" else "en/")
@@ -99,7 +98,7 @@ def render(lang, out, m, body, posts):
         alts = f'<link rel="alternate" hreflang="de" href="{de_url}">\n<link rel="alternate" hreflang="en" href="{en_url}">\n<link rel="alternate" hreflang="x-default" href="{de_url}">\n'
     navs = "".join(f'<a href="{start + h}">{n}</a>' for h, n in t["nav"])
     lsw = (f'<a class="lang" href="{r + alt}" hreflang="{other}" lang="{other}" title="{"English" if other == "en" else "Deutsch"}">'
-           f'<span aria-hidden="true">{lang.upper()} · </span><b>{other.upper()}</b></a>') if alt else ""
+           f'{"English" if other == "en" else "Deutsch"}</a>') if alt else ""
     legal = "".join(f'<a href="{start + h}">{n}</a>' for h, n in t["legal"])
     return f'''<!doctype html>
 <html lang="{lang}">
@@ -138,7 +137,7 @@ def render(lang, out, m, body, posts):
 </main>
 <footer>
   <div class="wrap">
-    <span>© 2026 {NAME} · Eichendorffstr. 38, 75031 Eppingen</span>
+    <span>© 2026 {NAME}, Eichendorffstr. 38, 75031 Eppingen</span>
     <nav aria-label="Legal">{legal}<a href="{start}blog/">Blog</a></nav>
   </div>
 </footer>
@@ -156,8 +155,8 @@ def main():
     for l in ("de", "en"):
         t = T[l]; out = "blog/index.html" if l == "de" else "en/blog/index.html"
         cards = "".join(card(l, rp, m, "../") for o, rp, m in posts[l])
-        body = (f'<section class="sec page-head"><div class="wrap"><div class="sec-head"><div class="eyebrow">Blog</div><h1>Blog</h1><p>{t["blog_lead"]}</p></div>'
-                f'<div class="grid">{cards}</div></div></section>')
+        body = (f'<section class="sec page-head"><div class="wrap"><div class="head"><h1>Blog</h1><p class="intro">{t["blog_lead"]}</p></div>'
+                f'<ul class="posts">{cards}</ul></div></section>')
         pages.append((l, out, "blog/index.html", {"title": t["blog_title"], "description": t["blog_desc"], "alt": "en/blog/index.html" if l == "de" else "blog/index.html"}, body))
     sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">']
     for lang, out, rp, m, b in pages:
