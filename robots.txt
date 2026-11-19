@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://marcelwagner-afk.github.io/stegarc-homepage/sitemap.xml

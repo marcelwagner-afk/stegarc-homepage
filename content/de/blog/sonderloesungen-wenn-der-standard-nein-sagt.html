@@ -1,0 +1,94 @@
+<!--META {"type":"post","title":"Individuelle Softwarelösung für SAP: wenn der Standard Nein sagt","description":"Wann eine individuelle Softwarelösung für SAP oder ein anderes ERP sinnvoll ist, wie Clean Core dabei hilft und wie Sie Make-or-Buy sauber entscheiden.","lead":"„Das geht im Standard nicht“ ist oft nur der Anfang der Diskussion. Dieser Beitrag zeigt, wann eine Sonderlösung sinnvoll ist und wie Sie sie so bauen, dass Ihr ERP updatefähig bleibt.","date":"2026-11-19","read":5,"tags":["SAP","ERP","Clean Core","Sonderlösungen"],"alt":"en/blog/custom-solutions-when-standard-says-no.html"}-->
+<p>„Das geht im Standard nicht.“ Diesen Satz hören Fachbereiche in ERP-Projekten regelmäßig. Häufig ist er berechtigt: Der Standard eines ERP-Systems bildet bewährte Prozesse ab, und jede Abweichung kostet Aufwand in Betrieb und Wartung. Manchmal aber endet die Diskussion an dieser Stelle zu früh – und ein Prozess, der das Unternehmen tatsächlich unterscheidet, wird in Excel, E-Mail oder Nebenlisten ausgelagert.</p>
+<p>Die Frage ist also nicht, ob Sie eine <strong>individuelle Softwarelösung für SAP</strong> oder ein anderes ERP-System brauchen dürfen, sondern wann sie sinnvoll ist und wie Sie sie so bauen, dass Ihr Kernsystem stabil und updatefähig bleibt. Die Prinzipien in diesem Beitrag gelten für SAP ebenso wie für Microsoft Dynamics 365, Oracle, Infor, proALPHA, abas oder Odoo – SAP dient hier als ein Beispiel unter mehreren.</p>
+<blockquote>„Nein“ heißt oft nur: nicht im Standard. Es heißt selten: gar nicht.</blockquote>
+
+<h2>Wann der ERP-Standard an Grenzen stößt</h2>
+<p>Aus meiner Erfahrung in SAP-Projekten sind es typischerweise fünf Situationen, in denen der Standard allein nicht reicht:</p>
+<ul>
+<li><strong>Branchenprozesse:</strong> Abläufe, die für Ihre Branche oder Ihr Geschäftsmodell typisch sind und die weder der Kern noch eine Branchenlösung ausreichend abdeckt.</li>
+<li><strong>Schnittstellen:</strong> Anbindung von Maschinen, Portalen, Partnern oder Behörden, für die es keinen fertigen Konnektor gibt.</li>
+<li><strong>Altsysteme:</strong> Fachanwendungen, die (noch) nicht abgelöst werden können und mit dem ERP Daten austauschen müssen.</li>
+<li><strong>Carve-outs:</strong> Bei Abspaltungen müssen Daten, Prozesse und Berechtigungen getrennt werden, oft unter Zeitdruck und mit Übergangsvereinbarungen zwischen Verkäufer und Käufer.</li>
+<li><strong>Konsolidierung:</strong> Nach Zukäufen laufen mehrere ERP-Systeme parallel, und Reporting oder Steuerung müssen über alle hinweg funktionieren, bevor eine Harmonisierung abgeschlossen ist.</li>
+</ul>
+<p>In all diesen Fällen lohnt sich zuerst ein genauer Blick, ob der Standard nicht doch passt – mit einer Prozessanpassung statt einer Softwareanpassung. Erst wenn das ehrlich verneint ist, geht es um das Wie.</p>
+
+<h2>Clean Core: Erweiterungen außerhalb des Kerns</h2>
+<p>Der wichtigste Grundsatz für jede Sonderlösung lautet: <strong>Den Kern nicht verändern.</strong> SAP nennt das „Clean Core“. Ziel ist laut SAP, den Kern „clean, standard, and upgrade-stable“ zu halten und Differenzierung trotzdem zu ermöglichen (<a href="https://news.sap.com/2025/08/extend-sap-s4hana-cloud-right-way-clean-clear/" rel="noopener">SAP News</a>).</p>
+<p>SAP unterscheidet dabei im Wesentlichen zwei Wege:</p>
+<ul>
+<li><strong>On-Stack-Erweiterungen</strong> im ERP mit ABAP Cloud, die nur freigegebene Schnittstellen nutzen.</li>
+<li><strong>Side-by-Side-Erweiterungen</strong> auf der SAP Business Technology Platform (BTP), die als eigenständige Anwendungen neben dem Kern laufen.</li>
+</ul>
+<p>Hinzu kommt ein Stufenmodell von A bis D: Stufe A nutzt ausschließlich öffentlich freigegebene, stabile Schnittstellen; Stufe D umfasst nicht empfohlene Techniken wie Modifikationen, direkte Schreibzugriffe auf SAP-Tabellen oder implizite Erweiterungen und gilt als höchstes Risiko (<a href="https://www.asug.com/insights/sap-updates-clean-core-guidance-to-help-customers-clarify-extensibility-criteria" rel="noopener">ASUG</a>).</p>
+<h3>Vergleichbare Konzepte bei anderen ERP-Systemen</h3>
+<p>Das Prinzip ist nicht SAP-spezifisch. Microsoft etwa hat bei Dynamics 365 Finance, Supply Chain und Commerce die Anpassung per „Overlayering“ durch ein Erweiterungsmodell ersetzt; laut Microsoft ist Extensibility dort das einzige Anpassungs-Framework, Overlayering wird nicht unterstützt (<a href="https://learn.microsoft.com/en-us/dynamics365/fin-ops-core/dev-itpro/extensibility/extensibility-home-page" rel="noopener">Microsoft Learn</a>). Auch andere Hersteller bieten Erweiterungskonzepte über Schnittstellen und Plattformen an. Die konkreten Möglichkeiten sollten Sie für Ihr System und Ihr Release jeweils beim Hersteller prüfen.</p>
+<h3>Eigenständige Services</h3>
+<p>Nicht jede Sonderlösung muss auf der Plattform des ERP-Herstellers laufen. Für manche Aufgaben – etwa systemübergreifende Auswertungen, Portale oder KI-Funktionen – kann ein eigenständiger Service, der über definierte Schnittstellen mit dem ERP spricht, die bessere Wahl sein. Das reduziert die Abhängigkeit vom Release-Zyklus des ERP, bringt aber eigenen Betriebsaufwand mit sich.</p>
+
+<h2>Make or Buy: Kriterien für die Entscheidung</h2>
+<p>Bevor Sie bauen, sollten Sie prüfen, ob es am Markt bereits eine passende Lösung gibt. Die folgende Tabelle hilft bei der Einordnung:</p>
+<table>
+<thead>
+<tr><th>Kriterium</th><th>Spricht eher für Kaufen</th><th>Spricht eher für Bauen</th></tr>
+</thead>
+<tbody>
+<tr><td>Differenzierung</td><td>Prozess ist branchenüblich</td><td>Prozess ist ein echter Wettbewerbsvorteil</td></tr>
+<tr><td>Marktangebot</td><td>Es gibt etablierte Produkte mit Referenzen</td><td>Kein Produkt deckt die Anforderung ab</td></tr>
+<tr><td>Änderungshäufigkeit</td><td>Anforderungen sind stabil</td><td>Anforderungen ändern sich häufig und schnell</td></tr>
+<tr><td>Betrieb</td><td>Kein eigenes Team für Weiterentwicklung</td><td>Verantwortung für Betrieb und Weiterentwicklung ist geklärt</td></tr>
+<tr><td>Lebensdauer</td><td>Lösung wird langfristig gebraucht und soll standardnah sein</td><td>Überbrückung, z. B. bis zur Harmonisierung nach einem Carve-out</td></tr>
+<tr><td>Abhängigkeit</td><td>Herstellerbindung ist akzeptabel</td><td>Datenhoheit und Unabhängigkeit sind wichtig</td></tr>
+</tbody>
+</table>
+<p>Selten sprechen alle Kriterien in eine Richtung. Wichtig ist, die Entscheidung bewusst und dokumentiert zu treffen – und die Gesamtkosten über die Lebensdauer zu betrachten, nicht nur die Entwicklungskosten. Wenn gleichzeitig ein Plattformwechsel ansteht, gehört die Frage in den größeren Rahmen; mehr dazu im Beitrag <a href="rise-with-sap-oder-alternativen.html">RISE with SAP oder Alternativen</a>.</p>
+
+<h2>Wartbarkeit: Sonderlösungen, die nicht zur Altlast werden</h2>
+<p>Eine Sonderlösung ist erst dann gut, wenn sie auch in einigen Jahren noch jemand versteht und anpassen kann. Achten Sie auf folgende Punkte:</p>
+<ul>
+<li><strong>Klare Schnittstellen:</strong> Nur freigegebene, dokumentierte APIs nutzen, keine direkten Tabellenzugriffe.</li>
+<li><strong>Kleiner Umfang:</strong> Die Sonderlösung macht genau eine Sache und nicht „alles, was der Standard nicht kann“.</li>
+<li><strong>Verantwortung:</strong> Es gibt einen fachlichen und einen technischen Eigentümer.</li>
+<li><strong>Updatefähigkeit:</strong> Jede ERP-Aktualisierung enthält einen Testschritt für die Sonderlösung.</li>
+<li><strong>Exit-Option:</strong> Es ist beschrieben, wie die Lösung abgeschaltet werden kann, falls der Standard die Funktion später abdeckt.</li>
+</ul>
+
+<h2>Dokumentieren und testen</h2>
+<p>Sonderlösungen scheitern selten an der ersten Version, sondern an fehlender Dokumentation und fehlenden Tests bei späteren Änderungen. Bewährt hat sich ein schlankes Paket:</p>
+<ol>
+<li><strong>Fachliche Beschreibung:</strong> Welches Problem löst die Lösung, warum reicht der Standard nicht, wer hat das entschieden?</li>
+<li><strong>Technische Beschreibung:</strong> Architektur, genutzte Schnittstellen, Datenflüsse, Berechtigungen.</li>
+<li><strong>Automatisierte Tests</strong> für die zentralen Abläufe, die bei jedem Release laufen.</li>
+<li><strong>Testfälle mit Fachbereich</strong> für Abnahme und Regressionstests.</li>
+<li><strong>Betriebshandbuch:</strong> Monitoring, Fehlerbehandlung, Ansprechpartner.</li>
+</ol>
+<p>Gerade bei einem Go-live gehören Sonderlösungen in den Cutover-Plan und die Generalproben. Wie das strukturiert gelingt, beschreibt der Beitrag <a href="cutover-planung-go-live.html">Cutover-Planung SAP</a>.</p>
+
+<h2>Checkliste: Bevor Sie eine Sonderlösung bauen</h2>
+<ul>
+<li>Ist geprüft, ob eine Prozessanpassung den Standard doch passend macht?</li>
+<li>Ist geprüft, ob es ein marktgängiges Produkt gibt?</li>
+<li>Bleibt der ERP-Kern unverändert (bei SAP: Clean Core)?</li>
+<li>Werden nur freigegebene Schnittstellen genutzt?</li>
+<li>Sind fachliche und technische Verantwortung benannt?</li>
+<li>Gibt es Dokumentation, automatisierte Tests und ein Betriebskonzept?</li>
+<li>Ist eine Exit-Option beschrieben?</li>
+</ul>
+
+<h2>FAQ</h2>
+<h3>Widerspricht eine Sonderlösung dem Clean-Core-Prinzip?</h3>
+<p>Nein, nicht wenn sie außerhalb des Kerns oder über freigegebene Schnittstellen umgesetzt wird. Clean Core richtet sich gegen Eingriffe in den Kern, nicht gegen Erweiterungen an sich.</p>
+<h3>Was passiert mit bestehenden Eigenentwicklungen bei einem Umstieg auf S/4HANA?</h3>
+<p>Sie sollten vor dem Umstieg inventarisiert und bewertet werden: Was wird noch genutzt, was deckt der neue Standard ab, was muss neu und sauber gebaut werden? Nicht genutzter Code muss nicht migriert werden.</p>
+<h3>Gilt das auch für andere ERP-Systeme als SAP?</h3>
+<p>Ja. Begriffe und Werkzeuge unterscheiden sich, das Prinzip – Kern stabil halten, Erweiterungen über definierte Schnittstellen – gilt herstellerübergreifend.</p>
+
+<p>Wenn Sie vor einer Anforderung stehen, bei der der Standard „Nein“ sagt, unterstütze ich Sie herstellerunabhängig bei Bewertung, Architektur und Umsetzung – mehr zu meinen <a href="../#leistungen">Leistungen</a> oder direkt per <a href="../#kontakt">Kontakt</a>.</p>
+
+<h2>Quellen</h2>
+<ul>
+<li><a href="https://news.sap.com/2025/08/extend-sap-s4hana-cloud-right-way-clean-clear/" rel="noopener">SAP News: Extend SAP S/4HANA Cloud the right way – clean and clear</a></li>
+<li><a href="https://www.asug.com/insights/sap-updates-clean-core-guidance-to-help-customers-clarify-extensibility-criteria" rel="noopener">ASUG: SAP Updates Clean Core Guidance to Help Customers Clarify Extensibility Criteria</a></li>
+<li><a href="https://learn.microsoft.com/en-us/dynamics365/fin-ops-core/dev-itpro/extensibility/extensibility-home-page" rel="noopener">Microsoft Learn: Extensibility home page (Dynamics 365 Finance and Operations)</a></li>
+</ul>

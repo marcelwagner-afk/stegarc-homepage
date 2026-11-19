@@ -1,0 +1,78 @@
+<!--META {"type": "post", "title": "SAP Licence Optimisation: Usage, Digital Access and Audits", "description": "SAP licence optimisation without empty promises: review user types, spot shelfware, understand Digital Access and prepare for measurement, audits and S/4HANA.", "lead": "SAP licences tend to grow over time and are rarely checked against actual usage. How to build transparency before an audit or an S/4HANA negotiation comes round.", "date": "2026-11-19", "read": 5, "tags": ["SAP licensing", "Digital Access", "S/4HANA", "RISE with SAP"], "alt": "blog/sap-lizenzen-optimieren.html"}-->
+<p>SAP licence agreements grow over the years: new entities, new modules, new interfaces. What rarely grows with them is a clear view of which licences are actually being used. That gap tends to surface at the worst moment – during a system measurement, an audit or negotiations about S/4HANA or RISE with SAP. <strong>SAP licence optimisation</strong> therefore starts with transparency.</p>
+<p>One point up front: this article makes no promises about savings. Whether anything can be saved, and how much, depends entirely on your contract and your usage. What I take from licence optimisation work is an approach that creates clarity, whatever the outcome.</p>
+
+<h2>The basis of SAP licence optimisation: actual usage</h2>
+<p>SAP provides measurement tools in all its systems: <strong>USMM</strong> for measuring users and engines, and the <strong>License Administration Workbench (LAW 2.0)</strong> for consolidating the results centrally. The trade journal e3mag highlights two points that are often overlooked. First, every user set up as active from a licensing perspective is measured, regardless of whether they actually use the system. Second, assigning the right licence type is the customer's responsibility.</p>
+<p>That leads to the first questions to ask:</p>
+<ul>
+<li>Are there users who have left or have not used the system for a long time but are still set up as active?</li>
+<li>Does the assigned licence type reflect what the person actually does – not just their authorisations?</li>
+<li>Are technical, test and emergency users classified correctly?</li>
+<li>Have the correction notes SAP provides for the measurement tools been applied?</li>
+</ul>
+<blockquote>Licence management is not an annual chore but an ongoing process. If you only look when the measurement comes round, you negotiate from a weak position.</blockquote>
+
+<h2>Shelfware: bought but never used</h2>
+<p>Beyond users, look at products and engines. Modules or packages are often bought as part of larger deals and then used only partly, or not at all. This shelfware usually still carries ongoing maintenance costs.</p>
+<p>Whether shelfware can be reduced or repurposed depends on the contract terms. Either way, a clean inventory is the prerequisite for raising the subject with SAP – for example in the context of a move to S/4HANA.</p>
+
+<h2>Digital Access and indirect use</h2>
+<p>Indirect use occurs when third-party systems, portals or interfaces create data in SAP without a named user working in the SAP system. Since 2018, SAP has offered <strong>Digital Access</strong>, a document-based licensing model for this. It licenses the creation of nine document types, such as sales, purchasing, invoice, material and financial documents. According to e3mag, only the initial creation of a document counts, not later changes, and financial and material documents carry a lower weighting.</p>
+<p>To help with estimates, SAP offers the no-cost <strong>Digital Access Evaluation Service</strong>, which gives customers an initial estimate of their document volumes. Even so, you need to know your own interface landscape: which systems create which documents in SAP, and which of those are already covered by named users?</p>
+
+<h2>Licence changes with S/4HANA and RISE with SAP</h2>
+<p>The licensing model changes with S/4HANA, and particularly with RISE with SAP. Under RISE, usage is measured in <strong>Full Usage Equivalents (FUEs)</strong>. According to SAPinsider, one FUE equals one Advanced Use user, five Core Use users or 30 Self-Service Use users.</p>
+<table>
+<thead>
+<tr><th>Usage type</th><th>Conversion</th><th>Typical usage</th></tr>
+</thead>
+<tbody>
+<tr><td>Advanced Use</td><td>1 FUE = 1 user</td><td>full access to solution capabilities</td></tr>
+<tr><td>Core Use</td><td>1 FUE = 5 users</td><td>limited access to specific areas</td></tr>
+<tr><td>Self-Service Use</td><td>1 FUE = 30 users</td><td>very limited, e.g. time entry, approvals</td></tr>
+</tbody>
+</table>
+<p>For negotiations, this means that the better you understand how your users work today, the more reliable your FUE planning will be. The binding definitions are in SAP's contract documents, which deserve close reading. I cover other contract points worth checking in the article on <a href="rise-with-sap-or-alternatives.html">RISE with SAP alternatives</a>, and the underlying deadlines in the article on <a href="sap-ecc-end-of-maintenance-2027.html">SAP ECC end of maintenance</a>.</p>
+<p>Questions of this kind are not unique to SAP; they arise in principle with other ERP and software vendors as well.</p>
+
+<h2>Preparing for an audit or negotiation</h2>
+<p>Good preparation follows a simple order: first your own data, then your contracts, then the conversation with SAP.</p>
+<ol>
+<li><strong>Capture the contract position:</strong> all contracts, amendments, licence types and quantities in one place.</li>
+<li><strong>Gather usage data:</strong> users, licence types, last log-on, actual activities.</li>
+<li><strong>Clean up:</strong> lock or delete inactive users and correct classifications.</li>
+<li><strong>Assess indirect use:</strong> document interfaces and the documents they create.</li>
+<li><strong>Model scenarios:</strong> continue as is, adjust, or move to S/4HANA or RISE.</li>
+<li><strong>Agree a negotiating position:</strong> align objectives, room for manoeuvre and limits internally.</li>
+</ol>
+<p>This article is not legal advice. For contractual or legal questions, please seek qualified legal counsel.</p>
+
+<h2>Checklist: next steps</h2>
+<ul>
+<li>Find your most recent system measurement and its results.</li>
+<li>List inactive and incorrectly classified users.</li>
+<li>Identify products that were bought but are not used.</li>
+<li>Review interfaces for indirect use.</li>
+<li>For S/4HANA or RISE, prepare an FUE estimate based on actual usage.</li>
+</ul>
+
+<h2>FAQ</h2>
+<h3>How often does SAP measure systems?</h3>
+<p>The trade press refers to an annual measurement. Regardless of that, it makes sense to use the data from USMM and LAW continuously for your own licence management.</p>
+<h3>Do I need to license Digital Access?</h3>
+<p>That depends on whether, and how, third-party systems create documents in SAP, and on what your contract says. An inventory of interfaces is the first step; the contractual assessment belongs with specialists.</p>
+<h3>Can licence costs be reduced with certainty?</h3>
+<p>No, there is no guarantee. But transparency about usage and contracts is the prerequisite for making informed decisions and negotiating at all.</p>
+
+<p>If you would like a vendor-independent analysis of your SAP licence position or help preparing a negotiation, have a look at my <a href="../#services">services</a> or <a href="../#contact">get in touch</a>.</p>
+
+<h2>Sources</h2>
+<ul>
+<li><a href="https://support.sap.com/system-data" rel="noopener">SAP Support: System Data / System Measurement (USMM, LAW 2.0)</a></li>
+<li><a href="https://e3mag.com/de/sapsche-lizenzvermessung-usmm-law/" rel="noopener">e3mag: SAP licence measurement with USMM and LAW (German)</a></li>
+<li><a href="https://www.computerwoche.de/article/2773378/sap-regelt-indirekte-nutzung-neu.html" rel="noopener">Computerwoche: SAP regelt indirekte Nutzung neu (German)</a></li>
+<li><a href="https://e3mag.com/de/neues-sap-lizenzmodell-alte-herausforderungen/" rel="noopener">e3mag: Neues SAP-Lizenzmodell, alte Herausforderungen (German)</a></li>
+<li><a href="https://support.sap.com/en/my-support/systems-installations/system-measurement/digital-access-evaluation-service.html" rel="noopener">SAP Support: Digital Access Evaluation Service</a></li>
+<li><a href="https://sapinsider.org/blogs/understanding-saps-fue-pricing-model-rise-with-sap/" rel="noopener">SAPinsider: Understanding SAP’s FUE Pricing Model</a></li>
+</ul>
