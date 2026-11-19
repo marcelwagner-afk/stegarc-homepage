@@ -1,0 +1,84 @@
+<!--META {"type":"post","title":"SAP HCM to SuccessFactors Migration: Options and Pitfalls","description":"SAP HCM to SuccessFactors migration: deadlines, deployment models such as core hybrid and side-by-side, payroll options, country rollout and common pitfalls.","lead":"The end of mainstream maintenance for SAP ERP HCM is getting closer. Here are the routes towards SuccessFactors, the payroll questions they raise and where projects tend to stall.","date":"2026-11-19","read":6,"tags":["SAP HCM","SuccessFactors","Employee Central","Payroll"],"alt":"blog/sap-hcm-zu-successfactors.html"}-->
+<p>Many organisations have run their HR processes reliably on SAP ERP HCM for years. With mainstream maintenance coming to an end, the question is what comes next. An <strong>SAP HCM to SuccessFactors migration</strong> is not the only route, but for many it is the obvious one. The important thing is to understand the options before committing to one.</p>
+<p>I have worked on several HCM transformations from strategy through to international rollout, including as programme lead. This article sums up the options, the questions worth settling early and the places where projects typically get stuck.</p>
+
+<h2>The starting point: deadlines for SAP ERP HCM</h2>
+<p>SAP ERP HCM is part of SAP Business Suite 7. According to SAP, mainstream maintenance runs until the end of 2027, followed by optional extended maintenance from 2028 to the end of 2030 at a premium of two percentage points. If you already run HR inside an on-premise S/4HANA system via the compatibility pack, your timeline is tighter: an SAP presentation for user groups states that usage rights for the HCM compatibility packs ran until the end of 2025.</p>
+<table>
+<thead>
+<tr><th>Scenario</th><th>Deadline according to SAP</th></tr>
+</thead>
+<tbody>
+<tr><td>SAP ERP HCM (Business Suite 7), mainstream maintenance</td><td>until end of 2027</td></tr>
+<tr><td>SAP ERP HCM, extended maintenance (premium)</td><td>2028 to end of 2030</td></tr>
+<tr><td>HCM compatibility pack in on-premise S/4HANA</td><td>usage rights until end of 2025</td></tr>
+<tr><td>SAP HCM for SAP S/4HANA (on-premise successor)</td><td>SAP states a commitment until 2040</td></tr>
+</tbody>
+</table>
+<p>I cover the deadlines for the rest of the ERP system in the article on <a href="sap-ecc-end-of-maintenance-2027.html">SAP ECC end of maintenance</a>.</p>
+
+<h2>Your options: cloud, hybrid or on-premise</h2>
+<p>SAP SuccessFactors Employee Central can be deployed in several ways. The right one depends on your system landscape, your payroll and how fast you want to move.</p>
+<ul>
+<li><strong>Full cloud:</strong> Employee Central and the other HR applications run in the cloud. Other business processes can stay in the ERP or in third-party systems.</li>
+<li><strong>Core hybrid:</strong> core HR and talent processes move to the cloud, while payroll and related processes remain in the SAP ERP system.</li>
+<li><strong>Side-by-side:</strong> the existing SAP ERP HCM system stays and Employee Central is added. In the consolidated variant, Employee Central is the system of record for all employees and data is replicated back; in the distributed variant, employees are split between the two systems. Organisations often choose this when a big-bang approach is not feasible.</li>
+<li><strong>SAP HCM for SAP S/4HANA:</strong> if you deliberately want to keep HR on-premise, this successor product is an alternative. SAP says it has committed to the offering until 2040.</li>
+</ul>
+<blockquote>Choosing a deployment model is not just an IT decision. It determines where your master HR data lives – and therefore who owns which processes in future.</blockquote>
+
+<h2>The data model: the underestimated core</h2>
+<p>Employee Central represents organisation, positions and employee data differently from SAP ERP HCM. Infotypes do not map across one to one. Before migrating, settle these points:</p>
+<ul>
+<li>which organisational objects and hierarchies you will need;</li>
+<li>whether you work with positions, and who maintains them;</li>
+<li>which fields are global and which are country-specific;</li>
+<li>which historical data genuinely has to be migrated;</li>
+<li>which downstream systems consume the data (time management, payroll, authorisations, reporting).</li>
+</ul>
+<p>A clean global data model at the outset saves a lot of country-specific workarounds later.</p>
+
+<h2>Payroll: the question that shapes everything</h2>
+<p>Payroll is usually the most complex part. SAP offers Employee Central Payroll, a hosted cloud version of the familiar on-premise SAP Payroll. Alternatively, under the core hybrid model, payroll can stay in your existing system for the time being, or you can connect external payroll providers for individual countries.</p>
+<p>For each country, ask: who runs payroll today, which statutory reporting depends on it, what custom developments exist, and how much effort would parallel payroll runs for reconciliation take? Without answers to these questions, no timeline will hold.</p>
+
+<h2>Country rollout, change and training</h2>
+<p>International organisations have to decide the rollout sequence. A pilot country of manageable complexity lets you test the template and the approach before larger countries follow. Local requirements – works council involvement, data protection, languages, statutory fields – belong in the plan from the start. In Germany, for instance, the works council usually has to be involved when HR systems are introduced or changed; check the details with your own experts, as this is not legal advice.</p>
+<p>Change management and training are often underestimated. Employee Central frequently shifts responsibilities: managers and employees take on self-service tasks that HR used to handle. That calls for training tailored to each audience, clear process descriptions and named contacts in each country.</p>
+
+<h3>Common pitfalls</h3>
+<ul>
+<li>Rebuilding the old HCM system instead of simplifying processes.</li>
+<li>Deciding the payroll strategy too late.</li>
+<li>Underestimating integrations with time management, finance and authorisations.</li>
+<li>Discovering poor data quality in the legacy system only during migration.</li>
+<li>Treating cutover as a technical step – the same rules apply as for any ERP go-live (see <a href="cutover-planning-go-live.html">SAP cutover planning</a>).</li>
+</ul>
+
+<h2>Checklist: next steps</h2>
+<ul>
+<li>Check the current deadlines for your HCM solution and your maintenance contract.</li>
+<li>Decide on a target model: full cloud, core hybrid, side-by-side or on-premise.</li>
+<li>Settle the payroll strategy country by country.</li>
+<li>Plan a global data model and data cleansing.</li>
+<li>Involve employee representatives and data protection early.</li>
+<li>Choose a pilot country and rollout sequence, and budget for change and training.</li>
+</ul>
+
+<h2>FAQ</h2>
+<h3>Do I have to be on SuccessFactors by the end of 2027?</h3>
+<p>Not necessarily. According to SAP, extended maintenance for SAP ERP HCM is available until the end of 2030 at a premium, and SAP HCM for SAP S/4HANA offers an on-premise alternative. If the cloud is your goal, though, do not underestimate how long such a programme takes.</p>
+<h3>Can payroll stay in the old system?</h3>
+<p>Yes, that is the idea behind the core hybrid model: core HR in Employee Central, payroll still in the SAP ERP system. You will need to keep that system's deadlines in view.</p>
+<h3>Is side-by-side a long-term solution?</h3>
+<p>It is mainly a transitional model for when a big bang is not feasible. Two systems of record mean ongoing integration and coordination effort.</p>
+
+<p>If you would like a vendor-independent review of your HR strategy or support setting up a SuccessFactors rollout, have a look at my <a href="../#services">services</a> or <a href="../#contact">get in touch</a>.</p>
+
+<h2>Sources</h2>
+<ul>
+<li><a href="https://community.sap.com/t5/enterprise-resource-planning-blog-posts-by-sap/sap-business-suite-7-extension-what-this-means-for-sap-erp-human-capital/ba-p/13424955" rel="noopener">SAP Community: SAP Business Suite 7 extension – what this means for SAP ERP Human Capital Management</a></li>
+<li><a href="https://assets.dm.ux.sap.com/sap-user-groups/pdfs/sap_compatibility_packs_way_forward_240507.pdf" rel="noopener">SAP: Compatibility Packs – Way Forward (user group presentation, May 2024)</a></li>
+<li><a href="https://blog.sap-press.com/sap-successfactors-employee-central-deployment-models" rel="noopener">SAP PRESS Blog: SAP SuccessFactors Employee Central Deployment Models</a></li>
+<li><a href="https://www.epiuselabs.com/lets-talk-hcm/do-i-have-to-move-off-my-on-premise-sap-payroll" rel="noopener">EPI-USE Labs: Do I have to move off my on-premise SAP Payroll?</a></li>
+</ul>

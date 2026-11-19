@@ -1,0 +1,100 @@
+<!--META {"type":"post","title":"KI im ERP: Wo sie sich lohnt – und wo nicht","description":"KI im ERP sinnvoll einsetzen: wo sie in SAP und anderen ERP-Systemen echten Nutzen bringt, wo nicht, und wie Sie mit kleinen Piloten sicher starten.","lead":"Nicht jeder Prozess braucht KI. Dieser Beitrag zeigt, wo KI im ERP tatsächlich Arbeit abnimmt, wo klassische Logik besser ist und wie Sie mit überschaubarem Risiko starten.","date":"2026-11-19","read":6,"tags":["KI","ERP","SAP","EU AI Act"],"alt":"en/blog/ai-in-erp-where-it-pays-off.html"}-->
+<p>Kaum ein ERP-Anbieter kommt heute ohne KI-Versprechen aus. SAP bewirbt seinen Assistenten <a href="https://www.sap.com/assetdetail/2025/01/60e808ac-1e7f-0010-bca6-c68f7e60039b.html" rel="noopener">Joule</a>, Microsoft bietet <a href="https://learn.microsoft.com/en-us/dynamics365/fin-ops-core/fin-ops/copilot/copilot-for-finance-operations" rel="noopener">Copilot-Funktionen in Dynamics 365</a>, und auch andere Anbieter positionieren KI-Funktionen in ihren Produkten. Für CIOs, CFOs und IT-Leiter stellt sich deshalb weniger die Frage, <em>ob</em> KI im ERP ankommt, sondern <strong>wo sie sich im eigenen Unternehmen wirklich lohnt</strong> – und wo sie nur zusätzliche Komplexität erzeugt.</p>
+<p>In Projekten erlebe ich häufig zwei Extreme: Entweder wird KI pauschal abgelehnt, oder es entsteht eine lange Wunschliste ohne klares Ziel. Beides führt selten zu Ergebnissen. Dieser Beitrag ordnet ein, wo KI im ERP sinnvoll ist, wo nicht, und wie Sie strukturiert starten. Die Prinzipien gelten für SAP ebenso wie für Microsoft Dynamics 365, Oracle, Infor, proALPHA, abas, Odoo und andere ERP-Systeme.</p>
+
+<h2>KI im ERP: Was sie gut kann – und was nicht</h2>
+<p>Ein ERP-System ist im Kern deterministisch: Eine Buchung folgt festen Regeln, ein Lagerbestand ist eine Zahl, eine Freigabe hat einen klaren Workflow. Generative KI und Machine Learning arbeiten dagegen mit Wahrscheinlichkeiten. Daraus ergibt sich eine einfache Faustregel:</p>
+<blockquote>KI lohnt sich dort, wo Menschen heute unstrukturierte Informationen lesen, deuten und zusammenführen. Sie lohnt sich nicht dort, wo das ERP bereits eindeutige Regeln sauber abbildet.</blockquote>
+<p>Die Stärken liegen also vor allem an den Rändern des ERP: beim Übergang von Dokumenten, E-Mails und Wissen in strukturierte Daten – und beim Zusammenfassen von Informationen aus mehreren Systemen.</p>
+
+<h2>Wo sich KI im ERP lohnt</h2>
+<p>Die folgenden Einsatzfelder haben gemeinsam, dass dort viel manuelle Lese- und Sucharbeit anfällt und das Ergebnis von einem Menschen geprüft werden kann.</p>
+<table>
+<thead>
+<tr><th>Einsatzfeld</th><th>Was KI übernimmt</th><th>Was beim Menschen bleibt</th></tr>
+</thead>
+<tbody>
+<tr><td>Dokumentenverarbeitung</td><td>Daten aus Lieferscheinen, Auftragsbestätigungen, Verträgen extrahieren und zuordnen</td><td>Prüfung bei Unsicherheit, Ausnahmefälle</td></tr>
+<tr><td>Rechnungseingang</td><td>Zuordnung zu Bestellung und Wareneingang, Erklärung von Abweichungen, Vorschlag für Kontierung</td><td>Freigabe und Buchung</td></tr>
+<tr><td>Abweichungsanalyse</td><td>Auffälligkeiten in Kosten, Preisen oder Mengen erkennen und in Klartext erläutern</td><td>Bewertung und Maßnahme</td></tr>
+<tr><td>Assistenten über mehrere Systeme</td><td>Antworten aus ERP, CRM, Ticketsystem und Dokumentablage bündeln</td><td>Entscheidung</td></tr>
+<tr><td>Einkauf und Verhandlungsvorbereitung</td><td>Lieferantenhistorie, Preisentwicklung und Vertragsbedingungen aufbereiten</td><td>Verhandlungsstrategie und Abschluss</td></tr>
+<tr><td>Wissenssuche</td><td>Prozessdokumentation, Customizing-Notizen und Arbeitsanweisungen durchsuchbar machen</td><td>Pflege der Quellen</td></tr>
+</tbody>
+</table>
+<h3>Ein Hinweis zum Rechnungseingang</h3>
+<p>In Deutschland müssen Unternehmen seit dem 1. Januar 2025 inländische B2B-E-Rechnungen empfangen können; für den Versand gelten Übergangsfristen bis Ende 2026 bzw. 2027, ab 2028 gilt die Pflicht für alle inländischen Unternehmen (<a href="https://www.ihk.de/heilbronn-franken/produktmarken/recht/steuern/umsatzsteuer-national/bmf-plant-verpflichtende-erechnung-und-meldesystem-6265236" rel="noopener">IHK Heilbronn-Franken</a>). Strukturierte Formate wie XRechnung oder ZUGFeRD lassen sich ohne KI auslesen. Der KI-Nutzen verschiebt sich damit: weg vom reinen Erkennen von Feldern, hin zum Abgleich, zur Klärung von Abweichungen und zur Verarbeitung von Belegen, die weiterhin unstrukturiert ankommen. Das ist keine Steuerberatung – prüfen Sie die Details mit Ihrer Steuerberatung.</p>
+
+<h2>Wo KI im ERP nicht hingehört</h2>
+<p>Ebenso wichtig ist die Liste der Fälle, in denen KI eher schadet als nützt:</p>
+<ul>
+<li><strong>Deterministische Buchungslogik:</strong> Steuerfindung, Kontenfindung, Bewertungsregeln oder Abschlussbuchungen sind klar geregelt. Hier ist sauber konfigurierte Standardlogik zuverlässiger, nachvollziehbarer und prüfbar.</li>
+<li><strong>Fehlende Datenqualität:</strong> Wenn Stammdaten doppelt, veraltet oder uneinheitlich sind, liefert KI keine besseren Antworten, sondern überzeugend formulierte falsche. Datenbereinigung kommt vor KI.</li>
+<li><strong>Fehlende Prozessklarheit:</strong> Ein Prozess, den niemand beschreiben kann, lässt sich auch nicht sinnvoll automatisieren.</li>
+<li><strong>Entscheidungen mit Rechtswirkung ohne Kontrolle:</strong> Dort, wo Entscheidungen Personen erheblich betreffen, setzt bereits die DSGVO Grenzen für ausschließlich automatisierte Entscheidungen (<a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" rel="noopener">Art. 22 DSGVO</a>).</li>
+</ul>
+
+<h2>Grundsatz: KI bucht nichts ohne Freigabe</h2>
+<p>Für den Einstieg empfehle ich ein klares Prinzip: <strong>Die KI bereitet vor, der Mensch gibt frei.</strong> Die KI schlägt eine Kontierung vor, erklärt eine Abweichung oder entwirft eine Lieferantenanfrage. Gebucht, bestellt oder versendet wird erst nach einer bewussten Freigabe durch eine berechtigte Person.</p>
+<p>Das hat mehrere Vorteile:</p>
+<ul>
+<li>Das bestehende Berechtigungs- und Freigabekonzept im ERP bleibt gültig.</li>
+<li>Fehler der KI werden sichtbar, bevor sie Folgen haben.</li>
+<li>Prüfer und Wirtschaftsprüfer finden eine nachvollziehbare Verantwortungskette.</li>
+<li>Mitarbeitende behalten die Kontrolle und entwickeln Vertrauen in das Werkzeug.</li>
+</ul>
+<p>Technisch bedeutet das: Die KI greift möglichst über freigegebene Schnittstellen auf das ERP zu und schreibt nicht direkt in Tabellen. Prüfen Sie dabei auch die Lizenzseite. Bei SAP etwa kann der Zugriff externer Systeme unter das dokumentbasierte Modell „Digital Access“ fallen (<a href="https://www.computerwoche.de/article/2773378/sap-regelt-indirekte-nutzung-neu.html" rel="noopener">Computerwoche</a>). Mehr dazu lesen Sie im Beitrag <a href="sap-lizenzen-optimieren.html">SAP-Lizenzen optimieren</a>.</p>
+
+<h2>Datenschutz und EU AI Act: Was jetzt schon gilt</h2>
+<p>Zwei Rahmenbedingungen sollten Sie von Anfang an berücksichtigen. Dies ist eine Orientierung, <strong>keine Rechtsberatung</strong>.</p>
+<h3>Datenschutz</h3>
+<p>Sobald personenbezogene Daten – etwa von Mitarbeitenden, Ansprechpartnern bei Lieferanten oder Kunden – an ein KI-Modell gehen, gelten die üblichen Fragen: Rechtsgrundlage, Auftragsverarbeitung, Speicherort, Löschung und Zweckbindung. Klären Sie früh, welche Daten das Modell sehen muss und welche nicht.</p>
+<h3>KI-Kompetenz nach Art. 4 AI Act</h3>
+<p>Die Vorgabe zur KI-Kompetenz gilt seit dem 2. Februar 2025 für Anbieter und Betreiber von KI-Systemen (<a href="https://digital-strategy.ec.europa.eu/de/faqs/ai-literacy-questions-answers" rel="noopener">EU-Kommission</a>). Mit dem „Digital Omnibus“ zum AI Act, in Kraft seit 27. Juli 2026, wurde Art. 4 abgeschwächt: Unternehmen müssen Maßnahmen zur Förderung der KI-Kompetenz ihrer Mitarbeitenden ergreifen, ohne für jede Person ein bestimmtes Kompetenzniveau garantieren zu müssen (<a href="https://www.lewissilkin.com/insights/2026/07/27/the-digital-omnibus-on-ai-enters-into-force-today-102nedo" rel="noopener">Lewis Silkin</a>). Praktisch heißt das: Schulungen und Einweisungen durchführen und dokumentieren. Die Pflichten für Hochrisiko-Systeme nach Anhang III wurden auf den 2. Dezember 2027 verschoben.</p>
+<p>Für typische ERP-Anwendungsfälle wie Rechnungseingang oder Wissenssuche ist eine Einstufung als Hochrisiko-System eher nicht zu erwarten. Anders kann es bei KI im Personalbereich aussehen, etwa bei der Bewerberauswahl. Lassen Sie die Einordnung im Einzelfall prüfen.</p>
+
+<h2>Vorgehen: kleine Piloten mit messbaren Zielen</h2>
+<p>Statt eines großen KI-Programms empfehle ich einen schrittweisen Weg:</p>
+<ol>
+<li><strong>Einen Prozess wählen</strong>, in dem heute spürbar manuell gelesen, gesucht oder abgeglichen wird.</li>
+<li><strong>Ausgangslage messen:</strong> Durchlaufzeit, Anzahl Rückfragen, Fehlerquote, Aufwand pro Vorgang – mit Ihren eigenen Zahlen.</li>
+<li><strong>Ziel und Abbruchkriterium festlegen</strong>, bevor der Pilot startet.</li>
+<li><strong>Mit echten, aber begrenzten Daten testen</strong> und eine kleine Gruppe von Anwendern einbinden.</li>
+<li><strong>Freigabeschritt einbauen</strong> und jede Abweichung zwischen KI-Vorschlag und menschlicher Entscheidung auswerten.</li>
+<li><strong>Entscheiden:</strong> ausrollen, anpassen oder bewusst beenden.</li>
+</ol>
+<p>Ein beendeter Pilot ist kein Scheitern, sondern eine günstige Erkenntnis. Teuer wird es erst, wenn ein unklarer Anwendungsfall ohne Messgrößen in den Regelbetrieb rutscht.</p>
+<p>Wenn Ihr ERP ohnehin vor einer Modernisierung steht, etwa beim Umstieg von SAP ECC auf S/4HANA, lohnt es sich, KI-Anwendungsfälle früh in die Zielarchitektur einzuplanen. Hintergründe dazu finden Sie im Beitrag <a href="sap-ecc-wartungsende-2027.html">SAP ECC Wartungsende 2027</a>.</p>
+
+<h2>Checkliste für den Einstieg</h2>
+<ul>
+<li>Gibt es einen konkreten Prozess mit hohem manuellem Lese- oder Suchaufwand?</li>
+<li>Sind die benötigten Stammdaten ausreichend sauber?</li>
+<li>Ist definiert, wer KI-Vorschläge freigibt?</li>
+<li>Erfolgt der Zugriff über freigegebene Schnittstellen, und ist die Lizenzfrage geklärt?</li>
+<li>Sind Datenschutz und Speicherort der Daten geklärt?</li>
+<li>Sind die beteiligten Mitarbeitenden geschult, und ist das dokumentiert?</li>
+<li>Gibt es messbare Ziele und ein Abbruchkriterium?</li>
+</ul>
+
+<h2>FAQ</h2>
+<h3>Brauche ich für KI im ERP ein neues ERP-System?</h3>
+<p>Nicht zwingend. Viele Anwendungsfälle lassen sich über Schnittstellen neben dem bestehenden System umsetzen. Die eingebauten KI-Funktionen der Hersteller sind teils an neuere Releases oder Cloud-Editionen gebunden – das sollten Sie im Einzelfall prüfen.</p>
+<h3>Kann die KI direkt im ERP buchen?</h3>
+<p>Technisch ist das oft möglich. Für den Einstieg rate ich davon ab: Die KI sollte Vorschläge machen, gebucht wird nach Freigabe durch eine berechtigte Person.</p>
+<h3>Wie viel Einsparung bringt KI im ERP?</h3>
+<p>Das lässt sich pauschal nicht seriös beantworten. Genau deshalb sollte jeder Pilot mit einer Messung der Ausgangslage beginnen – dann sehen Sie den Effekt in Ihren eigenen Zahlen.</p>
+
+<p>Wenn Sie einen ersten KI-Anwendungsfall in Ihrem ERP herstellerunabhängig bewerten oder einen Piloten aufsetzen möchten, finden Sie meine <a href="../#leistungen">Leistungen hier</a> – oder Sie nehmen direkt <a href="../#kontakt">Kontakt</a> auf.</p>
+
+<h2>Quellen</h2>
+<ul>
+<li><a href="https://digital-strategy.ec.europa.eu/de/faqs/ai-literacy-questions-answers" rel="noopener">EU-Kommission: AI Literacy – Questions &amp; Answers</a></li>
+<li><a href="https://www.lewissilkin.com/insights/2026/07/27/the-digital-omnibus-on-ai-enters-into-force-today-102nedo" rel="noopener">Lewis Silkin: The Digital Omnibus on AI enters into force today (27.07.2026)</a></li>
+<li><a href="https://www.boerse-express.com/news/articles/eu-ai-act-recruiting-ki-muss-erst-bis-dezember-2027-konform-sein-915211" rel="noopener">Börse Express: EU AI Act – Recruiting-KI muss erst bis Dezember 2027 konform sein</a></li>
+<li><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" rel="noopener">EUR-Lex: Verordnung (EU) 2016/679 (DSGVO)</a></li>
+<li><a href="https://www.ihk.de/heilbronn-franken/produktmarken/recht/steuern/umsatzsteuer-national/bmf-plant-verpflichtende-erechnung-und-meldesystem-6265236" rel="noopener">IHK Heilbronn-Franken: Verpflichtende E-Rechnung</a></li>
+<li><a href="https://www.computerwoche.de/article/2773378/sap-regelt-indirekte-nutzung-neu.html" rel="noopener">Computerwoche: SAP regelt indirekte Nutzung neu</a></li>
+<li><a href="https://www.sap.com/assetdetail/2025/01/60e808ac-1e7f-0010-bca6-c68f7e60039b.html" rel="noopener">SAP: Joule, the AI Copilot in SAP S/4HANA Cloud Public Edition</a></li>
+<li><a href="https://learn.microsoft.com/en-us/dynamics365/fin-ops-core/fin-ops/copilot/copilot-for-finance-operations" rel="noopener">Microsoft Learn: Overview of Copilot capabilities in finance and operations apps</a></li>
+</ul>

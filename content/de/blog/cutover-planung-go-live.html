@@ -1,0 +1,103 @@
+<!--META {"type":"post","title":"Cutover-Planung SAP: 10 Regeln für einen ruhigen Go-live","description":"Cutover-Planung SAP: Wie Sie Cutover-Plan, Generalproben, Freeze, Go/No-Go und Hypercare so aufsetzen, dass der Go-live planbar wird – mit 10 Regeln aus der Praxis.","lead":"Der Go-live entscheidet sich nicht am Go-live-Wochenende, sondern Monate vorher. Wie eine belastbare Cutover-Planung aussieht – für SAP und jedes andere ERP.","date":"2026-11-19","read":6,"tags":["Cutover","Go-live","S/4HANA","ERP"],"alt":"en/blog/cutover-planning-go-live.html"}-->
+<p>Ein ERP-Projekt kann monatelang gut laufen und am Ende an einem einzigen Wochenende scheitern. Der Grund ist selten die Software. Meist fehlt eine saubere <strong>Cutover-Planung</strong>: Aufgaben sind nicht in der richtigen Reihenfolge, Abhängigkeiten sind unklar, niemand weiß genau, wer um drei Uhr nachts die nächste Freigabe erteilt.</p>
+<p>Als Cutover-Manager in internationalen SAP-Programmen habe ich gelernt: Ein ruhiger Go-live ist das Ergebnis von Disziplin, nicht von Glück. In diesem Beitrag zeige ich, aus welchen Bausteinen eine belastbare Cutover-Planung für SAP besteht – und welche zehn Regeln sich bewährt haben.</p>
+<blockquote>Die Methode ist nicht SAP-spezifisch. Sie gilt für jeden ERP-Go-live – ob SAP S/4HANA, Microsoft Dynamics 365, Oracle oder ein anderes System. Die Beispiele in diesem Beitrag stammen aus der SAP-Welt.</blockquote>
+
+<h2>Was Cutover-Planung SAP eigentlich umfasst</h2>
+<p>Der Cutover ist der Übergang vom Altsystem in den Produktivbetrieb des neuen Systems. SAP beschreibt die Cutover-Planung als die Planung aller Aufgaben, die nötig sind, um mit der geforderten Qualität und im Zeitplan in die Produktion zu kommen. Im eigentlichen Produktiv-Cutover dient der Cutover-Plan dann als Steuerungsinstrument: Er legt die Reihenfolge fest, signalisiert den Start jeder Aktivität, sammelt Rückmeldungen und löst den nächsten Schritt aus.</p>
+<p>Dazu gehören typischerweise:</p>
+<ul>
+<li>technische Schritte (Transporte, Systemeinstellungen, Schnittstellen aktivieren),</li>
+<li>Datenmigration und Abgleich der übernommenen Daten,</li>
+<li>fachliche Schritte (offene Posten, Bestände, laufende Aufträge, Periodenabschlüsse),</li>
+<li>organisatorische Schritte (Freeze, Kommunikation, Berechtigungen, Support-Bereitschaft),</li>
+<li>Entscheidungspunkte (Go/No-Go) und ein Rückfallplan.</li>
+</ul>
+
+<h2>Der Cutover-Plan: ein Drehbuch, keine Aufgabenliste</h2>
+<p>Ein guter Cutover-Plan liest sich wie ein Drehbuch. Jede Zeile beantwortet dieselben Fragen: Was passiert, wer ist verantwortlich, wer führt aus, wann beginnt und endet der Schritt, wovon hängt er ab und woran erkennt man, dass er erfolgreich war?</p>
+<table>
+<thead>
+<tr><th>Feld</th><th>Zweck</th></tr>
+</thead>
+<tbody>
+<tr><td>Aktivität und ID</td><td>Eindeutige Referenz für Status-Calls und Protokoll</td></tr>
+<tr><td>Verantwortlich / Ausführend</td><td>Klare Zuordnung, inklusive Vertretung</td></tr>
+<tr><td>Vorgänger</td><td>Abhängigkeiten sichtbar machen, kritischen Pfad erkennen</td></tr>
+<tr><td>Geplante und tatsächliche Dauer</td><td>Lernkurve aus den Generalproben messbar machen</td></tr>
+<tr><td>Prüfkriterium</td><td>Wann gilt der Schritt als erledigt – mit Nachweis</td></tr>
+<tr><td>Eskalation</td><td>Wen ruft man an, wenn etwas hakt</td></tr>
+</tbody>
+</table>
+<p>Wichtig ist, dass der Plan früh entsteht. Wer erst kurz vor dem Go-live mit der Cutover-Planung beginnt, entdeckt Abhängigkeiten zu spät – etwa Schnittstellenpartner, die ebenfalls umstellen müssen, oder fachliche Abschlüsse, die nicht verschoben werden können.</p>
+
+<h2>Generalproben: Mock Cutovers sind Pflicht</h2>
+<p>SAP empfiehlt eine Cutover-Simulation oder Generalprobe („Dress Rehearsal“), die alle Aspekte des Cutovers vor dem Produktiv-Cutover testet: Plan, Prozesse, Logistik, Ressourcen und Systemumgebungen. Erkenntnisse daraus fließen in den Plan zurück; Teile oder die ganze Probe werden bei Bedarf wiederholt.</p>
+<p>In der Praxis haben sich mehrere Durchläufe bewährt: ein erster, technisch orientierter Durchlauf, dann Proben mit realistischen Datenmengen und schließlich eine Generalprobe unter möglichst echten Bedingungen – mit denselben Personen, die auch den Produktiv-Cutover durchführen. Erst dann sind Laufzeiten belastbar.</p>
+
+<h3>Datenmigration und Abgleich</h3>
+<p>Die Datenübernahme ist meist der längste und riskanteste Block. Entscheidend ist nicht nur, dass Daten geladen werden, sondern dass die Fachbereiche sie nachweisbar abgleichen: Anzahl der Datensätze, Summen und Salden, Stichproben auf Einzelbelegebene. Legen Sie die Abgleichsregeln und die Verantwortlichen für die Freigabe vor der ersten Generalprobe fest, nicht danach.</p>
+
+<h2>Freeze, Go/No-Go und Rückfallplan</h2>
+<p>Ein <strong>Freeze</strong> begrenzt Änderungen, damit der Cutover auf einem stabilen Stand stattfindet. Üblich sind ein Entwicklungs- oder Transport-Freeze für das neue System und ein Freeze für Stamm- und Bewegungsdaten im Altsystem. Beide müssen den Fachbereichen früh bekannt sein, denn sie greifen in den laufenden Betrieb ein.</p>
+<p>Die <strong>Go/No-Go-Entscheidung</strong> beschreibt SAP als finalen Entscheidungspunkt, an dem die zentralen Stakeholder den Fortschritt prüfen und die Freigabe erteilen oder verweigern. Sie wird so früh terminiert, dass eine Rückkehr zu Altsystem und alten Prozessen ohne Störung des Geschäftsbetriebs noch möglich ist. Das setzt voraus, dass es einen getesteten Rückfallplan gibt.</p>
+<p>Gute Go/No-Go-Kriterien sind messbar und vorab vereinbart, zum Beispiel:</p>
+<ul>
+<li>alle kritischen Cutover-Schritte abgeschlossen und abgenommen,</li>
+<li>Datenabgleich in den definierten Toleranzen und fachlich freigegeben,</li>
+<li>keine offenen Fehler der höchsten Priorität,</li>
+<li>Schnittstellen und Berechtigungen getestet,</li>
+<li>Support-Organisation einsatzbereit.</li>
+</ul>
+
+<h2>Hypercare, Kommunikation und Rollenmodell</h2>
+<p>Nach dem Go-live folgt die <strong>Hypercare</strong>: eine intensive Betreuungsphase, in der das Projektteam die Anwender bei Problemen und Fragen unterstützt, bevor das System an den regulären Betrieb übergeben wird. Support-Personal, Prozesse und Werkzeuge sollten bereits in der Generalprobe getestet werden. Definieren Sie vorab, wann die Hypercare endet und welche Kriterien die Übergabe auslösen.</p>
+<p>Kommunikation ist ein eigener Arbeitsstrang. Anwender müssen wissen, wann sie nicht buchen dürfen, ab wann sie im neuen System arbeiten und wohin sie sich wenden. Intern braucht es feste Status-Calls mit klarer Agenda.</p>
+<p>Ein schlankes Rollenmodell hilft:</p>
+<ul>
+<li><strong>Cutover-Manager:</strong> steuert Plan, Status und Eskalationen.</li>
+<li><strong>Workstream-Leads:</strong> verantworten ihre Schritte (Technik, Daten, Fachbereiche, Schnittstellen).</li>
+<li><strong>Entscheidungsgremium:</strong> trifft Go/No-Go und Rückfallentscheidungen.</li>
+<li><strong>Hypercare-Team und Betrieb:</strong> übernehmen nach dem Go-live, mit geplantem Wissenstransfer.</li>
+</ul>
+
+<h2>10 praxisnahe Regeln für den Cutover</h2>
+<ol>
+<li>Beginnen Sie die Cutover-Planung früh, parallel zu Build und Test.</li>
+<li>Ein Plan, eine Wahrheit: ein zentraler Cutover-Plan statt verteilter Listen.</li>
+<li>Jeder Schritt hat einen Verantwortlichen, eine Vertretung und ein Prüfkriterium.</li>
+<li>Führen Sie mehrere Generalproben durch und messen Sie die tatsächlichen Laufzeiten.</li>
+<li>Planen Sie Puffer auf dem kritischen Pfad ein.</li>
+<li>Vereinbaren Sie Abgleichsregeln und Freigaben für Daten vor der ersten Probe.</li>
+<li>Kommunizieren Sie Freeze-Zeiten früh und verbindlich.</li>
+<li>Legen Sie Go/No-Go-Kriterien vorab schriftlich fest.</li>
+<li>Testen Sie den Rückfallplan – ein ungetesteter Rückfallplan ist keiner.</li>
+<li>Planen Sie Hypercare mit Ende, Kriterien und Übergabe an den Betrieb.</li>
+</ol>
+
+<h2>Checkliste: Nächste Schritte</h2>
+<ul>
+<li>Cutover-Manager benennen und Cutover als eigenen Arbeitsstrang aufsetzen.</li>
+<li>Ersten Entwurf des Cutover-Plans mit allen Workstreams erstellen.</li>
+<li>Termine für Generalproben in den Projektplan aufnehmen.</li>
+<li>Freeze-Zeiten mit den Fachbereichen abstimmen.</li>
+<li>Go/No-Go-Kriterien und Entscheidungsgremium festlegen.</li>
+<li>Hypercare-Organisation und Übergabe an den Betrieb planen.</li>
+</ul>
+<p>Wenn der Cutover Teil einer S/4HANA-Umstellung ist, lohnt ein Blick auf die Fristen: Mehr dazu im Beitrag zum <a href="sap-ecc-wartungsende-2027.html">SAP ECC Wartungsende 2027</a>. Wer zusätzlich eine HR-Umstellung plant, findet Hinweise im Beitrag <a href="sap-hcm-zu-successfactors.html">SAP HCM zu SuccessFactors</a>.</p>
+
+<h2>FAQ</h2>
+<h3>Wie viele Generalproben braucht ein Cutover?</h3>
+<p>Eine feste Zahl gibt es nicht. Entscheidend ist, dass die letzte Probe ohne wesentliche Abweichungen und mit belastbaren Laufzeiten durchläuft. Größe, Datenvolumen und Anzahl der Schnittstellen bestimmen, wie viele Durchläufe dafür nötig sind.</p>
+<h3>Gilt diese Vorgehensweise nur für SAP?</h3>
+<p>Nein. Cutover-Plan, Generalproben, Freeze, Go/No-Go und Hypercare sind Grundprinzipien jedes ERP-Go-lives – für SAP genauso wie für Microsoft Dynamics 365, Oracle oder andere Systeme. Nur Werkzeuge und technische Details unterscheiden sich.</p>
+<h3>Wann sollte die Go/No-Go-Entscheidung fallen?</h3>
+<p>So früh, dass ein Rückfall auf das Altsystem ohne Störung des Geschäftsbetriebs noch möglich ist. Den genauen Zeitpunkt leiten Sie aus den Laufzeiten der Generalproben ab.</p>
+
+<p>Wenn Sie für Ihren Go-live einen erfahrenen Cutover-Manager oder einen unabhängigen Blick auf Ihren Cutover-Plan suchen, finden Sie mein <a href="../#leistungen">Leistungsangebot hier</a> – oder Sie <a href="../#kontakt">nehmen direkt Kontakt auf</a>.</p>
+
+<h2>Quellen</h2>
+<ul>
+<li><a href="https://community.sap.com/t5/enterprise-resource-planning-blog-posts-by-sap/sap-project-manager-s-guide-to-sap-project-cutover/ba-p/13510809" rel="noopener">SAP Community: SAP Project Manager’s Guide to SAP Project Cutover</a></li>
+<li><a href="https://learning.sap.com/courses/acting-as-professional-change-manager-in-sap-cloud-projects/mitigating-go-live-related-risks" rel="noopener">SAP Learning: Mitigating Go-Live Related Risks</a></li>
+</ul>

@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cutover-Planung SAP: 10 Regeln für einen ruhigen Go-live · Marcel Wagner – STEGARC</title>
+<meta name="description" content="Cutover-Planung SAP: Wie Sie Cutover-Plan, Generalproben, Freeze, Go/No-Go und Hypercare so aufsetzen, dass der Go-live planbar wird – mit 10 Regeln aus der Praxis.">
+<link rel="canonical" href="https://marcelwagner-afk.github.io/stegarc-homepage/blog/cutover-planung-go-live.html">
+<link rel="alternate" hreflang="de" href="https://marcelwagner-afk.github.io/stegarc-homepage/blog/cutover-planung-go-live.html">
+<link rel="alternate" hreflang="en" href="https://marcelwagner-afk.github.io/stegarc-homepage/en/blog/cutover-planning-go-live.html">
+<link rel="alternate" hreflang="x-default" href="https://marcelwagner-afk.github.io/stegarc-homepage/blog/cutover-planung-go-live.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="STEGARC">
+<meta property="og:title" content="Cutover-Planung SAP: 10 Regeln für einen ruhigen Go-live">
+<meta property="og:description" content="Cutover-Planung SAP: Wie Sie Cutover-Plan, Generalproben, Freeze, Go/No-Go und Hypercare so aufsetzen, dass der Go-live planbar wird – mit 10 Regeln aus der Praxis.">
+<meta property="og:url" content="https://marcelwagner-afk.github.io/stegarc-homepage/blog/cutover-planung-go-live.html">
+<meta property="og:image" content="https://marcelwagner-afk.github.io/stegarc-homepage/assets/og.jpg">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="author" content="Marcel Wagner">
+<meta name="theme-color" content="#17153a">
+<link rel="icon" href="../assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "ProfessionalService", "@id": "https://marcelwagner-afk.github.io/stegarc-homepage/#org", "name": "Marcel Wagner – STEGARC", "url": "https://marcelwagner-afk.github.io/stegarc-homepage/", "email": "marcel.wagner@w-dfs.de", "telephone": "+491791600252", "image": "https://marcelwagner-afk.github.io/stegarc-homepage/assets/og.jpg", "logo": "https://marcelwagner-afk.github.io/stegarc-homepage/assets/logo.svg", "founder": {"@type": "Person", "name": "Marcel Wagner", "jobTitle": "Inhaber"}, "address": {"@type": "PostalAddress", "streetAddress": "Eichendorffstr. 38", "postalCode": "75031", "addressLocality": "Eppingen", "addressRegion": "Baden-Württemberg", "addressCountry": "DE"}, "areaServed": ["DE", "AT", "CH", "EU"], "knowsLanguage": ["de", "en", "fr"], "knowsAbout": ["SAP S/4HANA", "SAP ECC", "RISE with SAP", "Cutover-Management", "SAP-Lizenzoptimierung", "SAP SuccessFactors", "Künstliche Intelligenz im ERP", "Individuelle Softwareentwicklung", "Systemintegration"]}, {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Cutover-Planung SAP: 10 Regeln für einen ruhigen Go-live", "description": "Cutover-Planung SAP: Wie Sie Cutover-Plan, Generalproben, Freeze, Go/No-Go und Hypercare so aufsetzen, dass der Go-live planbar wird – mit 10 Regeln aus der Praxis.", "datePublished": "2026-11-19", "dateModified": "2026-11-19", "inLanguage": "de", "mainEntityOfPage": "https://marcelwagner-afk.github.io/stegarc-homepage/blog/cutover-planung-go-live.html", "author": {"@type": "Person", "name": "Marcel Wagner", "url": "https://marcelwagner-afk.github.io/stegarc-homepage/"}, "publisher": {"@id": "https://marcelwagner-afk.github.io/stegarc-homepage/#org"}, "image": "https://marcelwagner-afk.github.io/stegarc-homepage/assets/og.jpg", "keywords": "Cutover, Go-live, S/4HANA, ERP"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://marcelwagner-afk.github.io/stegarc-homepage/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://marcelwagner-afk.github.io/stegarc-homepage/blog/"}, {"@type": "ListItem", "position": 3, "name": "Cutover-Planung SAP: 10 Regeln für einen ruhigen Go-live", "item": "https://marcelwagner-afk.github.io/stegarc-homepage/blog/cutover-planung-go-live.html"}]}]</script>
+</head>
+<body>
+<a class="skip" href="#inhalt">Zum Inhalt springen</a>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../" aria-label="STEGARC – Startseite"><svg width="30" height="30" viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b6a2ff"/><stop offset="1" stop-color="#6a45f0"/></linearGradient></defs><path d="M31 11.5C28.8 8.6 25 7.5 20.5 7.5 14.4 7.5 10 10.3 10 14.4s4 5.9 10.3 6.9c6.3 1 10.2 2.8 10.2 7S26 34 19.7 34C15 34 11.3 32.8 9 30" fill="none" stroke="url(#lg)" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/></svg> STEGARC</a>
+    <nav class="nav" aria-label="Navigation"><a href="../#leistungen">Leistungen</a><a href="../#vorgehen">Vorgehen</a><a href="../#projekte">Projekte</a><a href="../#plattform">STEGARC</a><a href="../blog/">Blog</a></nav>
+    <a class="lang" href="../en/blog/cutover-planning-go-live.html" hreflang="en" lang="en" title="English"><span aria-hidden="true">DE · </span><b>EN</b></a>
+    <a class="btn pri" href="../#kontakt">Kontakt</a>
+  </div>
+</header>
+<main id="inhalt">
+<article class="wrap post">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Startseite</a> › <a href="../blog/">Blog</a></nav>
+  <header class="post-head">
+    <div class="post-meta">19. November 2026 · 6 Min. Lesezeit · von Marcel Wagner</div>
+    <h1>Cutover-Planung SAP: 10 Regeln für einen ruhigen Go-live</h1>
+    <p class="lead">Der Go-live entscheidet sich nicht am Go-live-Wochenende, sondern Monate vorher. Wie eine belastbare Cutover-Planung aussieht – für SAP und jedes andere ERP.</p>
+    <div class="tags"><span class="tag">Cutover</span><span class="tag">Go-live</span><span class="tag">S/4HANA</span><span class="tag">ERP</span></div>
+  </header>
+  <div class="prose">
+<p>Ein ERP-Projekt kann monatelang gut laufen und am Ende an einem einzigen Wochenende scheitern. Der Grund ist selten die Software. Meist fehlt eine saubere <strong>Cutover-Planung</strong>: Aufgaben sind nicht in der richtigen Reihenfolge, Abhängigkeiten sind unklar, niemand weiß genau, wer um drei Uhr nachts die nächste Freigabe erteilt.</p>
+<p>Als Cutover-Manager in internationalen SAP-Programmen habe ich gelernt: Ein ruhiger Go-live ist das Ergebnis von Disziplin, nicht von Glück. In diesem Beitrag zeige ich, aus welchen Bausteinen eine belastbare Cutover-Planung für SAP besteht – und welche zehn Regeln sich bewährt haben.</p>
+<blockquote>Die Methode ist nicht SAP-spezifisch. Sie gilt für jeden ERP-Go-live – ob SAP S/4HANA, Microsoft Dynamics 365, Oracle oder ein anderes System. Die Beispiele in diesem Beitrag stammen aus der SAP-Welt.</blockquote>
+
+<h2>Was Cutover-Planung SAP eigentlich umfasst</h2>
+<p>Der Cutover ist der Übergang vom Altsystem in den Produktivbetrieb des neuen Systems. SAP beschreibt die Cutover-Planung als die Planung aller Aufgaben, die nötig sind, um mit der geforderten Qualität und im Zeitplan in die Produktion zu kommen. Im eigentlichen Produktiv-Cutover dient der Cutover-Plan dann als Steuerungsinstrument: Er legt die Reihenfolge fest, signalisiert den Start jeder Aktivität, sammelt Rückmeldungen und löst den nächsten Schritt aus.</p>
+<p>Dazu gehören typischerweise:</p>
+<ul>
+<li>technische Schritte (Transporte, Systemeinstellungen, Schnittstellen aktivieren),</li>
+<li>Datenmigration und Abgleich der übernommenen Daten,</li>
+<li>fachliche Schritte (offene Posten, Bestände, laufende Aufträge, Periodenabschlüsse),</li>
+<li>organisatorische Schritte (Freeze, Kommunikation, Berechtigungen, Support-Bereitschaft),</li>
+<li>Entscheidungspunkte (Go/No-Go) und ein Rückfallplan.</li>
+</ul>
+
+<h2>Der Cutover-Plan: ein Drehbuch, keine Aufgabenliste</h2>
+<p>Ein guter Cutover-Plan liest sich wie ein Drehbuch. Jede Zeile beantwortet dieselben Fragen: Was passiert, wer ist verantwortlich, wer führt aus, wann beginnt und endet der Schritt, wovon hängt er ab und woran erkennt man, dass er erfolgreich war?</p>
+<table>
+<thead>
+<tr><th>Feld</th><th>Zweck</th></tr>
+</thead>
+<tbody>
+<tr><td>Aktivität und ID</td><td>Eindeutige Referenz für Status-Calls und Protokoll</td></tr>
+<tr><td>Verantwortlich / Ausführend</td><td>Klare Zuordnung, inklusive Vertretung</td></tr>
+<tr><td>Vorgänger</td><td>Abhängigkeiten sichtbar machen, kritischen Pfad erkennen</td></tr>
+<tr><td>Geplante und tatsächliche Dauer</td><td>Lernkurve aus den Generalproben messbar machen</td></tr>
+<tr><td>Prüfkriterium</td><td>Wann gilt der Schritt als erledigt – mit Nachweis</td></tr>
+<tr><td>Eskalation</td><td>Wen ruft man an, wenn etwas hakt</td></tr>
+</tbody>
+</table>
+<p>Wichtig ist, dass der Plan früh entsteht. Wer erst kurz vor dem Go-live mit der Cutover-Planung beginnt, entdeckt Abhängigkeiten zu spät – etwa Schnittstellenpartner, die ebenfalls umstellen müssen, oder fachliche Abschlüsse, die nicht verschoben werden können.</p>
+
+<h2>Generalproben: Mock Cutovers sind Pflicht</h2>
+<p>SAP empfiehlt eine Cutover-Simulation oder Generalprobe („Dress Rehearsal“), die alle Aspekte des Cutovers vor dem Produktiv-Cutover testet: Plan, Prozesse, Logistik, Ressourcen und Systemumgebungen. Erkenntnisse daraus fließen in den Plan zurück; Teile oder die ganze Probe werden bei Bedarf wiederholt.</p>
+<p>In der Praxis haben sich mehrere Durchläufe bewährt: ein erster, technisch orientierter Durchlauf, dann Proben mit realistischen Datenmengen und schließlich eine Generalprobe unter möglichst echten Bedingungen – mit denselben Personen, die auch den Produktiv-Cutover durchführen. Erst dann sind Laufzeiten belastbar.</p>
+
+<h3>Datenmigration und Abgleich</h3>
+<p>Die Datenübernahme ist meist der längste und riskanteste Block. Entscheidend ist nicht nur, dass Daten geladen werden, sondern dass die Fachbereiche sie nachweisbar abgleichen: Anzahl der Datensätze, Summen und Salden, Stichproben auf Einzelbelegebene. Legen Sie die Abgleichsregeln und die Verantwortlichen für die Freigabe vor der ersten Generalprobe fest, nicht danach.</p>
+
+<h2>Freeze, Go/No-Go und Rückfallplan</h2>
+<p>Ein <strong>Freeze</strong> begrenzt Änderungen, damit der Cutover auf einem stabilen Stand stattfindet. Üblich sind ein Entwicklungs- oder Transport-Freeze für das neue System und ein Freeze für Stamm- und Bewegungsdaten im Altsystem. Beide müssen den Fachbereichen früh bekannt sein, denn sie greifen in den laufenden Betrieb ein.</p>
+<p>Die <strong>Go/No-Go-Entscheidung</strong> beschreibt SAP als finalen Entscheidungspunkt, an dem die zentralen Stakeholder den Fortschritt prüfen und die Freigabe erteilen oder verweigern. Sie wird so früh terminiert, dass eine Rückkehr zu Altsystem und alten Prozessen ohne Störung des Geschäftsbetriebs noch möglich ist. Das setzt voraus, dass es einen getesteten Rückfallplan gibt.</p>
+<p>Gute Go/No-Go-Kriterien sind messbar und vorab vereinbart, zum Beispiel:</p>
+<ul>
+<li>alle kritischen Cutover-Schritte abgeschlossen und abgenommen,</li>
+<li>Datenabgleich in den definierten Toleranzen und fachlich freigegeben,</li>
+<li>keine offenen Fehler der höchsten Priorität,</li>
+<li>Schnittstellen und Berechtigungen getestet,</li>
+<li>Support-Organisation einsatzbereit.</li>
+</ul>
+
+<h2>Hypercare, Kommunikation und Rollenmodell</h2>
+<p>Nach dem Go-live folgt die <strong>Hypercare</strong>: eine intensive Betreuungsphase, in der das Projektteam die Anwender bei Problemen und Fragen unterstützt, bevor das System an den regulären Betrieb übergeben wird. Support-Personal, Prozesse und Werkzeuge sollten bereits in der Generalprobe getestet werden. Definieren Sie vorab, wann die Hypercare endet und welche Kriterien die Übergabe auslösen.</p>
+<p>Kommunikation ist ein eigener Arbeitsstrang. Anwender müssen wissen, wann sie nicht buchen dürfen, ab wann sie im neuen System arbeiten und wohin sie sich wenden. Intern braucht es feste Status-Calls mit klarer Agenda.</p>
+<p>Ein schlankes Rollenmodell hilft:</p>
+<ul>
+<li><strong>Cutover-Manager:</strong> steuert Plan, Status und Eskalationen.</li>
+<li><strong>Workstream-Leads:</strong> verantworten ihre Schritte (Technik, Daten, Fachbereiche, Schnittstellen).</li>
+<li><strong>Entscheidungsgremium:</strong> trifft Go/No-Go und Rückfallentscheidungen.</li>
+<li><strong>Hypercare-Team und Betrieb:</strong> übernehmen nach dem Go-live, mit geplantem Wissenstransfer.</li>
+</ul>
+
+<h2>10 praxisnahe Regeln für den Cutover</h2>
+<ol>
+<li>Beginnen Sie die Cutover-Planung früh, parallel zu Build und Test.</li>
+<li>Ein Plan, eine Wahrheit: ein zentraler Cutover-Plan statt verteilter Listen.</li>
+<li>Jeder Schritt hat einen Verantwortlichen, eine Vertretung und ein Prüfkriterium.</li>
+<li>Führen Sie mehrere Generalproben durch und messen Sie die tatsächlichen Laufzeiten.</li>
+<li>Planen Sie Puffer auf dem kritischen Pfad ein.</li>
+<li>Vereinbaren Sie Abgleichsregeln und Freigaben für Daten vor der ersten Probe.</li>
+<li>Kommunizieren Sie Freeze-Zeiten früh und verbindlich.</li>
+<li>Legen Sie Go/No-Go-Kriterien vorab schriftlich fest.</li>
+<li>Testen Sie den Rückfallplan – ein ungetesteter Rückfallplan ist keiner.</li>
+<li>Planen Sie Hypercare mit Ende, Kriterien und Übergabe an den Betrieb.</li>
+</ol>
+
+<h2>Checkliste: Nächste Schritte</h2>
+<ul>
+<li>Cutover-Manager benennen und Cutover als eigenen Arbeitsstrang aufsetzen.</li>
+<li>Ersten Entwurf des Cutover-Plans mit allen Workstreams erstellen.</li>
+<li>Termine für Generalproben in den Projektplan aufnehmen.</li>
+<li>Freeze-Zeiten mit den Fachbereichen abstimmen.</li>
+<li>Go/No-Go-Kriterien und Entscheidungsgremium festlegen.</li>
+<li>Hypercare-Organisation und Übergabe an den Betrieb planen.</li>
+</ul>
+<p>Wenn der Cutover Teil einer S/4HANA-Umstellung ist, lohnt ein Blick auf die Fristen: Mehr dazu im Beitrag zum <a href="sap-ecc-wartungsende-2027.html">SAP ECC Wartungsende 2027</a>. Wer zusätzlich eine HR-Umstellung plant, findet Hinweise im Beitrag <a href="sap-hcm-zu-successfactors.html">SAP HCM zu SuccessFactors</a>.</p>
+
+<h2>FAQ</h2>
+<h3>Wie viele Generalproben braucht ein Cutover?</h3>
+<p>Eine feste Zahl gibt es nicht. Entscheidend ist, dass die letzte Probe ohne wesentliche Abweichungen und mit belastbaren Laufzeiten durchläuft. Größe, Datenvolumen und Anzahl der Schnittstellen bestimmen, wie viele Durchläufe dafür nötig sind.</p>
+<h3>Gilt diese Vorgehensweise nur für SAP?</h3>
+<p>Nein. Cutover-Plan, Generalproben, Freeze, Go/No-Go und Hypercare sind Grundprinzipien jedes ERP-Go-lives – für SAP genauso wie für Microsoft Dynamics 365, Oracle oder andere Systeme. Nur Werkzeuge und technische Details unterscheiden sich.</p>
+<h3>Wann sollte die Go/No-Go-Entscheidung fallen?</h3>
+<p>So früh, dass ein Rückfall auf das Altsystem ohne Störung des Geschäftsbetriebs noch möglich ist. Den genauen Zeitpunkt leiten Sie aus den Laufzeiten der Generalproben ab.</p>
+
+<p>Wenn Sie für Ihren Go-live einen erfahrenen Cutover-Manager oder einen unabhängigen Blick auf Ihren Cutover-Plan suchen, finden Sie mein <a href="../#leistungen">Leistungsangebot hier</a> – oder Sie <a href="../#kontakt">nehmen direkt Kontakt auf</a>.</p>
+
+<h2>Quellen</h2>
+<ul>
+<li><a href="https://community.sap.com/t5/enterprise-resource-planning-blog-posts-by-sap/sap-project-manager-s-guide-to-sap-project-cutover/ba-p/13510809" rel="noopener">SAP Community: SAP Project Manager’s Guide to SAP Project Cutover</a></li>
+<li><a href="https://learning.sap.com/courses/acting-as-professional-change-manager-in-sap-cloud-projects/mitigating-go-live-related-risks" rel="noopener">SAP Learning: Mitigating Go-Live Related Risks</a></li>
+</ul>
+
+  </div>
+  <aside class="post-cta"><h2>Sie stehen vor einer ähnlichen Entscheidung?</h2><p>Schildern Sie kurz Ihre Ausgangslage – ich melde mich mit einem Vorschlag für ein erstes Gespräch.</p><a class="btn pri" href="../#kontakt">Gespräch vereinbaren</a></aside>
+</article>
+<section class="sec alt"><div class="wrap"><div class="sec-head"><h2>Weitere Beiträge</h2></div><div class="grid"><article class="card post-card"><div class="post-meta">19. November 2026 · 6 Min. Lesezeit</div><h3><a href="../blog/ki-im-erp-sinnvoll-einsetzen.html">KI im ERP: Wo sie sich lohnt – und wo nicht</a></h3><p>KI im ERP sinnvoll einsetzen: wo sie in SAP und anderen ERP-Systemen echten Nutzen bringt, wo nicht, und wie Sie mit kleinen Piloten sicher starten.</p><a class="more" href="../blog/ki-im-erp-sinnvoll-einsetzen.html" aria-label="Weiterlesen: KI im ERP: Wo sie sich lohnt – und wo nicht">Weiterlesen →</a></article><article class="card post-card"><div class="post-meta">19. November 2026 · 6 Min. Lesezeit</div><h3><a href="../blog/rise-with-sap-oder-alternativen.html">RISE with SAP Alternativen: ein neutraler Entscheidungsrahmen</a></h3><p>RISE with SAP Alternativen im Vergleich: was das Abo umfasst, welche Vertragspunkte Sie prüfen sollten und wann On-Premise oder ein anderes ERP passt.</p><a class="more" href="../blog/rise-with-sap-oder-alternativen.html" aria-label="Weiterlesen: RISE with SAP Alternativen: ein neutraler Entscheidungsrahmen">Weiterlesen →</a></article><article class="card post-card"><div class="post-meta">19. November 2026 · 6 Min. Lesezeit</div><h3><a href="../blog/sap-ecc-wartungsende-2027.html">SAP ECC Wartungsende 2027: Fristen, Optionen, Entscheidung</a></h3><p>SAP ECC Wartungsende 2027: Welche Fristen gelten, was Extended Maintenance und Transition Option bedeuten und welche Optionen Ihr Unternehmen jetzt hat.</p><a class="more" href="../blog/sap-ecc-wartungsende-2027.html" aria-label="Weiterlesen: SAP ECC Wartungsende 2027: Fristen, Optionen, Entscheidung">Weiterlesen →</a></article><article class="card post-card"><div class="post-meta">19. November 2026 · 6 Min. Lesezeit</div><h3><a href="../blog/sap-hcm-zu-successfactors.html">SAP HCM Migration zu SuccessFactors: Optionen und Fallstricke</a></h3><p>SAP HCM Migration SuccessFactors: Fristen, Betriebsmodelle wie Core Hybrid und Side-by-Side, Payroll-Optionen, Länder-Rollout und typische Stolpersteine im Überblick.</p><a class="more" href="../blog/sap-hcm-zu-successfactors.html" aria-label="Weiterlesen: SAP HCM Migration zu SuccessFactors: Optionen und Fallstricke">Weiterlesen →</a></article><article class="card post-card"><div class="post-meta">19. November 2026 · 6 Min. Lesezeit</div><h3><a href="../blog/sap-lizenzen-optimieren.html">SAP Lizenzoptimierung: Nutzung, Digital Access und Audit</a></h3><p>SAP Lizenzoptimierung ohne leere Versprechen: Nutzertypen prüfen, Shelfware erkennen, Digital Access verstehen und sich auf Vermessung, Audit und S/4HANA vorbereiten.</p><a class="more" href="../blog/sap-lizenzen-optimieren.html" aria-label="Weiterlesen: SAP Lizenzoptimierung: Nutzung, Digital Access und Audit">Weiterlesen →</a></article><article class="card post-card"><div class="post-meta">19. November 2026 · 5 Min. Lesezeit</div><h3><a href="../blog/sonderloesungen-wenn-der-standard-nein-sagt.html">Individuelle Softwarelösung für SAP: wenn der Standard Nein sagt</a></h3><p>Wann eine individuelle Softwarelösung für SAP oder ein anderes ERP sinnvoll ist, wie Clean Core dabei hilft und wie Sie Make-or-Buy sauber entscheiden.</p><a class="more" href="../blog/sonderloesungen-wenn-der-standard-nein-sagt.html" aria-label="Weiterlesen: Individuelle Softwarelösung für SAP: wenn der Standard Nein sagt">Weiterlesen →</a></article></div></div></section>
+</main>
+<footer>
+  <div class="wrap">
+    <span>© 2026 Marcel Wagner – STEGARC · Eichendorffstr. 38, 75031 Eppingen</span>
+    <nav aria-label="Legal"><a href="../impressum.html">Impressum</a><a href="../datenschutz.html">Datenschutz</a><a href="../blog/">Blog</a></nav>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!--META {"type":"post","title":"SAP Lizenzoptimierung: Nutzung, Digital Access und Audit","description":"SAP Lizenzoptimierung ohne leere Versprechen: Nutzertypen prüfen, Shelfware erkennen, Digital Access verstehen und sich auf Vermessung, Audit und S/4HANA vorbereiten.","lead":"SAP-Lizenzen sind oft historisch gewachsen und selten mit der tatsächlichen Nutzung abgeglichen. Wie Sie Transparenz schaffen, bevor Audit oder S/4HANA-Verhandlung anstehen.","date":"2026-11-19","read":6,"tags":["SAP Lizenzen","Digital Access","S/4HANA","RISE with SAP"],"alt":"en/blog/optimise-sap-licences.html"}-->
+<p>SAP-Lizenzverträge wachsen über Jahre mit: neue Gesellschaften, neue Module, neue Schnittstellen. Was selten mitwächst, ist der Überblick darüber, welche Lizenzen tatsächlich genutzt werden. Spätestens bei einer Systemvermessung, einem Audit oder der Verhandlung über S/4HANA oder RISE with SAP rächt sich das. <strong>SAP Lizenzoptimierung</strong> heißt deshalb zuerst: Transparenz schaffen.</p>
+<p>Ein Hinweis vorab: Ich mache in diesem Beitrag keine Einsparversprechen. Ob und wie viel sich einsparen lässt, hängt vollständig von Ihrem Vertrag und Ihrer Nutzung ab. Was ich aus Projekten zur Lizenzoptimierung mitnehme, ist eine Vorgehensweise, die Klarheit bringt – unabhängig vom Ergebnis.</p>
+
+<h2>Grundlage der SAP Lizenzoptimierung: tatsächliche Nutzung</h2>
+<p>SAP stellt in allen Systemen Werkzeuge für die Systemvermessung bereit: <strong>USMM</strong> zur Vermessung von Nutzern und Engines und die <strong>License Administration Workbench (LAW 2.0)</strong> zur zentralen Konsolidierung der Ergebnisse. Die Fachzeitschrift e3mag weist auf zwei Punkte hin, die oft übersehen werden: Vermessen wird jeder Nutzer, der aus lizenzrechtlicher Sicht als aktiv angelegt ist – unabhängig davon, ob er das System tatsächlich nutzt. Und die Zuordnung des passenden Lizenztyps liegt in der Verantwortung des Kunden.</p>
+<p>Daraus ergeben sich die ersten Prüffragen:</p>
+<ul>
+<li>Gibt es Nutzer, die ausgeschieden sind oder das System seit langem nicht mehr verwenden, aber noch aktiv angelegt sind?</li>
+<li>Passt der zugeordnete Lizenztyp zu dem, was die Person tatsächlich tut – nicht nur zu ihren Berechtigungen?</li>
+<li>Sind technische Nutzer, Test- und Notfallnutzer korrekt klassifiziert?</li>
+<li>Sind die von SAP bereitgestellten Korrekturhinweise für die Vermessungswerkzeuge eingespielt?</li>
+</ul>
+<blockquote>Lizenzmanagement ist kein jährlicher Pflichttermin, sondern ein laufender Prozess. Wer erst bei der Vermessung hinschaut, verhandelt aus einer schwachen Position.</blockquote>
+
+<h2>Shelfware: gekauft, aber nie genutzt</h2>
+<p>Neben Nutzern lohnt der Blick auf Produkte und Engines. Häufig wurden Module oder Pakete im Rahmen größerer Verträge erworben und nie oder nur teilweise produktiv eingesetzt. Diese sogenannte Shelfware verursacht in der Regel laufende Wartungskosten.</p>
+<p>Ob sich Shelfware reduzieren oder umwidmen lässt, hängt von den Vertragsbedingungen ab. Eine saubere Bestandsaufnahme ist aber in jedem Fall die Voraussetzung, um mit SAP darüber zu sprechen – etwa im Zusammenhang mit einer Umstellung auf S/4HANA.</p>
+
+<h2>Digital Access und indirekte Nutzung</h2>
+<p>Indirekte Nutzung entsteht, wenn Drittsysteme, Portale oder Schnittstellen in SAP Daten erzeugen, ohne dass ein benannter Nutzer im SAP-System arbeitet. Seit 2018 bietet SAP dafür mit <strong>Digital Access</strong> ein dokumentbasiertes Lizenzmodell an. Lizenziert wird die Erstellung von neun Dokumenttypen, etwa Verkaufs-, Einkaufs-, Rechnungs-, Material- und Finanzbelege. Laut e3mag ist nur die erstmalige Erstellung eines Dokuments relevant, nicht spätere Änderungen; Finanz- und Materialbelege werden mit einem geringeren Faktor gewichtet.</p>
+<p>Für die Einschätzung bietet SAP den kostenfreien <strong>Digital Access Evaluation Service</strong> an, mit dem Kunden eine erste Schätzung ihrer Dokumentmengen erhalten. Wichtig ist, dass Sie Ihre Schnittstellenlandschaft selbst kennen: Welche Systeme erzeugen welche Belege in SAP, und welche davon werden bereits über benannte Nutzer abgedeckt?</p>
+
+<h2>Lizenzwechsel bei S/4HANA und RISE with SAP</h2>
+<p>Mit S/4HANA und insbesondere mit RISE with SAP ändert sich das Lizenzmodell. In RISE wird die Nutzung über <strong>Full Usage Equivalents (FUE)</strong> abgerechnet. Laut SAPinsider entspricht ein FUE einem Nutzer mit „Advanced Use“, fünf Nutzern mit „Core Use“ oder 30 Nutzern mit „Self-Service Use“.</p>
+<table>
+<thead>
+<tr><th>Nutzungsart</th><th>Umrechnung</th><th>Typische Nutzung</th></tr>
+</thead>
+<tbody>
+<tr><td>Advanced Use</td><td>1 FUE = 1 Nutzer</td><td>umfassender Zugriff auf die Funktionen</td></tr>
+<tr><td>Core Use</td><td>1 FUE = 5 Nutzer</td><td>eingeschränkter Zugriff auf bestimmte Bereiche</td></tr>
+<tr><td>Self-Service Use</td><td>1 FUE = 30 Nutzer</td><td>sehr eingeschränkt, z. B. Zeiterfassung, Genehmigungen</td></tr>
+</tbody>
+</table>
+<p>Für die Verhandlung bedeutet das: Je genauer Sie wissen, wie Ihre Nutzer heute arbeiten, desto belastbarer ist die FUE-Planung. Die verbindlichen Definitionen stehen in den jeweiligen Vertragsunterlagen von SAP; diese sollten Sie im Detail prüfen. Welche Vertragspunkte bei RISE sonst wichtig sind, beschreibe ich im Beitrag <a href="rise-with-sap-oder-alternativen.html">RISE with SAP oder Alternativen</a>. Die zugrunde liegenden Fristen finden Sie im Beitrag zum <a href="sap-ecc-wartungsende-2027.html">SAP ECC Wartungsende 2027</a>.</p>
+<p>Lizenzfragen dieser Art stellen sich übrigens nicht nur bei SAP, sondern grundsätzlich auch bei anderen ERP- und Softwareanbietern.</p>
+
+<h2>Vorbereitung auf Audit und Verhandlung</h2>
+<p>Eine gute Vorbereitung folgt einer einfachen Reihenfolge: erst die eigene Datenlage, dann die Vertragslage, dann das Gespräch mit SAP.</p>
+<ol>
+<li><strong>Vertragsbestand erfassen:</strong> alle Verträge, Nachträge, Lizenztypen und Mengen an einer Stelle.</li>
+<li><strong>Nutzung erheben:</strong> Nutzer, Lizenztypen, letzte Anmeldung, tatsächliche Tätigkeiten.</li>
+<li><strong>Bereinigen:</strong> inaktive Nutzer sperren oder löschen, Klassifizierungen korrigieren.</li>
+<li><strong>Indirekte Nutzung bewerten:</strong> Schnittstellen und erzeugte Dokumente dokumentieren.</li>
+<li><strong>Szenarien rechnen:</strong> Fortführung, Anpassung, Umstieg auf S/4HANA oder RISE.</li>
+<li><strong>Verhandlungsposition festlegen:</strong> Ziele, Spielräume und Grenzen intern abstimmen.</li>
+</ol>
+<p>Dieser Beitrag ist keine Rechtsberatung. Bei vertraglichen oder rechtlichen Fragen sollten Sie juristischen Rat einholen.</p>
+
+<h2>Checkliste: Nächste Schritte</h2>
+<ul>
+<li>Letzte Systemvermessung und deren Ergebnis heraussuchen.</li>
+<li>Liste inaktiver und falsch klassifizierter Nutzer erstellen.</li>
+<li>Gekaufte, aber nicht genutzte Produkte identifizieren.</li>
+<li>Schnittstellen auf indirekte Nutzung prüfen.</li>
+<li>Für S/4HANA oder RISE eine FUE-Abschätzung auf Basis der tatsächlichen Nutzung erstellen.</li>
+</ul>
+
+<h2>FAQ</h2>
+<h3>Wie oft vermisst SAP die Systeme?</h3>
+<p>Die Fachpresse spricht von einer jährlichen Vermessung. Unabhängig davon empfiehlt es sich, die Daten aus USMM und LAW laufend für das eigene Lizenzmanagement zu nutzen.</p>
+<h3>Muss ich Digital Access lizenzieren?</h3>
+<p>Das hängt davon ab, ob und wie Drittsysteme Dokumente in SAP erzeugen und was Ihr Vertrag regelt. Eine Bestandsaufnahme der Schnittstellen ist der erste Schritt; die vertragliche Bewertung gehört in fachkundige Hände.</p>
+<h3>Kann ich garantiert Lizenzkosten senken?</h3>
+<p>Nein, eine Garantie gibt es nicht. Transparenz über Nutzung und Vertrag ist aber die Voraussetzung, um überhaupt fundiert entscheiden und verhandeln zu können.</p>
+
+<p>Wenn Sie Ihre SAP-Lizenzsituation herstellerunabhängig analysieren oder eine Verhandlung vorbereiten möchten, finden Sie mein <a href="../#leistungen">Leistungsangebot hier</a> – oder Sie <a href="../#kontakt">nehmen direkt Kontakt auf</a>.</p>
+
+<h2>Quellen</h2>
+<ul>
+<li><a href="https://support.sap.com/system-data" rel="noopener">SAP Support: System Data / System Measurement (USMM, LAW 2.0)</a></li>
+<li><a href="https://e3mag.com/de/sapsche-lizenzvermessung-usmm-law/" rel="noopener">e3mag: SAPsche Lizenzvermessung mit USMM und LAW</a></li>
+<li><a href="https://www.computerwoche.de/article/2773378/sap-regelt-indirekte-nutzung-neu.html" rel="noopener">Computerwoche: SAP regelt indirekte Nutzung neu</a></li>
+<li><a href="https://e3mag.com/de/neues-sap-lizenzmodell-alte-herausforderungen/" rel="noopener">e3mag: Neues SAP-Lizenzmodell, alte Herausforderungen</a></li>
+<li><a href="https://support.sap.com/en/my-support/systems-installations/system-measurement/digital-access-evaluation-service.html" rel="noopener">SAP Support: Digital Access Evaluation Service</a></li>
+<li><a href="https://sapinsider.org/blogs/understanding-saps-fue-pricing-model-rise-with-sap/" rel="noopener">SAPinsider: Understanding SAP’s FUE Pricing Model</a></li>
+</ul>
