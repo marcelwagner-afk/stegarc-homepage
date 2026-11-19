@@ -22,7 +22,7 @@ LOGO = ('<svg width="30" height="30" viewBox="0 0 40 40" aria-hidden="true"><def
 MON = {"de": ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
        "en": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]}
 T = {
-    "de": {"nav": [("#leistungen", "Leistungen"), ("#vorgehen", "Vorgehen"), ("#projekte", "Projekte"), ("#plattform", "STEGARC"), ("blog/", "Blog")],
+    "de": {"nav": [("#leistungen", "Leistungen"), ("#vorgehen", "Vorgehen"), ("#projekte", "Projekte"), ("#plattform", "STEGARC"), ("#ueber", "Über mich")],
            "contact": "Kontakt", "anchor": "kontakt", "skip": "Zum Inhalt springen", "home": "Startseite",
            "legal": [("impressum.html", "Impressum"), ("datenschutz.html", "Datenschutz")],
            "blog_title": "Blog – SAP-Transformation, KI und Sonderlösungen",
@@ -31,7 +31,7 @@ T = {
            "read": "Min. Lesezeit", "by": "von Marcel Wagner", "more": "Weiterlesen", "related": "Weitere Beiträge", "updated": "aktualisiert",
            "cta_h": "Sie stehen vor einer ähnlichen Entscheidung?", "cta_p": "Schildern Sie kurz Ihre Ausgangslage – ich melde mich mit einem Vorschlag für ein erstes Gespräch.",
            "cta_b": "Gespräch vereinbaren", "date": lambda d: f"{int(d[8:10])}. {MON['de'][int(d[5:7]) - 1]} {d[:4]}", "locale": "de_DE"},
-    "en": {"nav": [("#services", "Services"), ("#approach", "Approach"), ("#projects", "Projects"), ("#platform", "STEGARC"), ("blog/", "Blog")],
+    "en": {"nav": [("#services", "Services"), ("#approach", "Approach"), ("#projects", "Projects"), ("#platform", "STEGARC"), ("#about", "About me")],
            "contact": "Contact", "anchor": "contact", "skip": "Skip to content", "home": "Home",
            "legal": [("legal-notice.html", "Legal notice"), ("privacy.html", "Privacy")],
            "blog_title": "Blog – SAP transformation, AI and custom solutions",
@@ -98,7 +98,7 @@ def render(lang, out, m, body, posts):
         alts = f'<link rel="alternate" hreflang="de" href="{de_url}">\n<link rel="alternate" hreflang="en" href="{en_url}">\n<link rel="alternate" hreflang="x-default" href="{de_url}">\n'
     navs = "".join(f'<a href="{start + h}">{n}</a>' for h, n in t["nav"])
     lsw = (f'<a class="lang" href="{r + alt}" hreflang="{other}" lang="{other}" title="{"English" if other == "en" else "Deutsch"}">'
-           f'{"English" if other == "en" else "Deutsch"}</a>') if alt else ""
+           f'{other.upper()}</a>') if alt else ""
     legal = "".join(f'<a href="{start + h}">{n}</a>' for h, n in t["legal"])
     return f'''<!doctype html>
 <html lang="{lang}">
@@ -117,7 +117,7 @@ def render(lang, out, m, body, posts):
 <meta property="og:locale" content="{t["locale"]}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="author" content="Marcel Wagner">
-<meta name="theme-color" content="#17153a">
+<meta name="theme-color" content="#f4f7f8" media="(prefers-color-scheme: light)">\n<meta name="theme-color" content="#06121c" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="{r}assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="{r}assets/style.css">
 <script type="application/ld+json">{json.dumps(ld if len(ld) > 1 else org, ensure_ascii=False)}</script>
@@ -126,7 +126,7 @@ def render(lang, out, m, body, posts):
 <a class="skip" href="#inhalt">{t["skip"]}</a>
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="{start}" aria-label="STEGARC – {t["home"]}">{LOGO} STEGARC</a>
+    <a class="brand" href="{start}" aria-label="STEGARC – {t["home"]}">STEGARC</a>
     <nav class="nav" aria-label="Navigation">{navs}</nav>
     {lsw}
     <a class="btn pri" href="{start}#{t["anchor"]}">{t["contact"]}</a>
