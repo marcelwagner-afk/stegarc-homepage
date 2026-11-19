@@ -92,8 +92,9 @@ p{margin:0}
 
 /* ---------- Hero (hell) ---------- */
 .hero{position:relative;overflow:hidden;background:var(--bg)}
-.hero .art{position:absolute;top:0;right:0;bottom:0;width:58%;pointer-events:none}
-.hero .art img{width:100%;height:100%;object-fit:cover;object-position:right center;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 30%);mask-image:linear-gradient(90deg,transparent 0,#000 30%)}
+.hero .art{position:absolute;inset:0;pointer-events:none}
+.hero .art::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0,rgba(248,249,250,.94) 32%,rgba(248,249,250,.55) 50%,rgba(248,249,250,0) 68%),linear-gradient(0deg,var(--bg) 0,rgba(248,249,250,0) 22%)}
+.hero .art picture{display:block;height:100%}.hero .art img{width:100%;height:100%;object-fit:cover;object-position:70% center}
 .hero .wrap{position:relative;padding-top:clamp(56px,7vw,112px);padding-bottom:clamp(48px,5vw,80px)}
 .hero .copy{max-width:720px}
 .hero h1{font-size:var(--fs-h1);font-weight:700;letter-spacing:-.035em;line-height:1.02;color:var(--navy)}
@@ -104,8 +105,8 @@ p{margin:0}
 .feat{display:flex;gap:14px;align-items:center}
 .feat svg{color:var(--teal-ink);flex:none}
 .feat b{display:block;font-size:16px;font-weight:600}.feat span{font-size:14.5px;color:var(--ink-3)}
-@media (min-width:961px) and (max-width:1240px){.hero .art{width:46%}.hero .copy{max-width:56%}}
-@media (max-width:960px){.hero .art{position:relative;width:auto;height:min(64vw,380px)}.hero .art img{object-position:65% center;-webkit-mask-image:linear-gradient(180deg,#000 70%,transparent);mask-image:linear-gradient(180deg,#000 70%,transparent)}.hero .wrap{padding-top:var(--s4)}.feats{flex-direction:column;gap:var(--s2)}}
+@media (min-width:961px) and (max-width:1240px){.hero .copy{max-width:60%}}
+@media (max-width:960px){.hero .art{position:relative;height:min(56vw,340px)}.hero .art::after{background:linear-gradient(0deg,var(--bg) 0,rgba(248,249,250,0) 40%)}.hero .art img{object-position:75% center}.hero .wrap{padding-top:var(--s4)}.feats{flex-direction:column;gap:var(--s2)}}
 
 /* ---------- Praxis-Band (Laptop, Konzeptdarstellung) ---------- */
 .praxis{background:linear-gradient(180deg,var(--bg),var(--alt));border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden}
@@ -159,17 +160,17 @@ p{margin:0}
 
 /* Leistungskarten */
 .svc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s3)}
-.svc article{position:relative;overflow:hidden;display:flex;flex-direction:column;min-height:300px;padding:var(--s4);transition:transform var(--t) var(--ease),box-shadow var(--t) var(--ease),border-color var(--t) var(--ease)}
+.svc article{position:relative;overflow:hidden;display:flex;flex-direction:column;padding:0;transition:transform var(--t) var(--ease),box-shadow var(--t) var(--ease),border-color var(--t) var(--ease)}
 .svc article:hover{transform:translateY(-4px);box-shadow:var(--sh-3);border-color:#cfe9e7}
-.svc .pic{position:absolute;inset:0 0 auto auto;width:78%;height:66%;pointer-events:none}
-.svc .pic img{width:100%;height:100%;object-fit:cover;-webkit-mask-image:linear-gradient(205deg,#000 35%,transparent 82%);mask-image:linear-gradient(205deg,#000 35%,transparent 82%);transition:transform .6s var(--ease)}
-.svc article:hover .pic img{transform:scale(1.04)}
-.svc .ic{position:relative;color:var(--teal-ink);margin-bottom:96px}
-.svc h3{position:relative;font-size:22px;font-weight:700;color:var(--navy)}
-.svc p{position:relative;color:var(--ink-2);font-size:var(--fs-small);margin-top:var(--s1)}
-.svc .more{position:relative;margin-top:auto;padding-top:var(--s2);font-weight:600;font-size:14.5px;text-decoration:none;display:inline-flex;gap:6px;align-items:center}
+.svc .band{aspect-ratio:4.5/1;overflow:hidden;background:var(--navy)}
+.svc .band img{width:100%;height:100%;object-fit:cover;object-position:left center;transition:transform .6s var(--ease)}
+.svc article:hover .band img{transform:scale(1.04)}
+.svc .body{display:flex;flex-direction:column;flex:1;padding:var(--s3) var(--s4) var(--s4)}
+.svc h3{font-size:22px;font-weight:700;color:var(--navy)}
+.svc p{color:var(--ink-2);font-size:var(--fs-small);margin-top:var(--s1)}
+.svc .more{margin-top:auto;padding-top:var(--s2);font-weight:600;font-size:14.5px;text-decoration:none;display:inline-flex;gap:6px;align-items:center}
 @media (max-width:1100px){.svc{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:680px){.svc{grid-template-columns:minmax(0,1fr)}.svc article{min-height:260px}}
+@media (max-width:680px){.svc{grid-template-columns:minmax(0,1fr)}}
 /* Ergänzende Schwerpunkte */
 .extra{display:grid;grid-template-columns:200px repeat(3,minmax(0,1fr));align-items:center;margin-top:var(--s3);padding:var(--s4)}
 .extra>h3{font-size:18px;color:var(--navy);padding-right:var(--s3);border-right:1px solid var(--line);align-self:stretch;display:flex;align-items:center}
@@ -182,7 +183,7 @@ p{margin:0}
 
 /* ---------- STEGARC Technology (dunkel) ---------- */
 .tech{overflow:hidden}
-.tech .bgart{position:absolute;inset:0;pointer-events:none;opacity:.55}
+.tech .bgart{position:absolute;inset:0;pointer-events:none;opacity:.5;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 45%);mask-image:linear-gradient(90deg,transparent 0,#000 45%)}
 .tech .bgart img{width:100%;height:100%;object-fit:cover;object-position:center}
 .tech .wrap{position:relative}
 .tech .grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:var(--s6);align-items:center}
@@ -203,6 +204,11 @@ p{margin:0}
 @media (max-width:960px){.split{grid-template-columns:minmax(0,1fr);gap:var(--s5)}}
 .uses{list-style:none;margin:var(--s4) 0 0;padding:0;display:grid;gap:var(--s2)}
 .uses li{display:flex;gap:12px}.uses li svg{color:var(--teal);flex:none;margin-top:4px}
+.kiside{display:flex;flex-direction:column;gap:var(--s3)}
+.kiside{position:relative}.kiside .chip{position:absolute;top:-28px;right:-12px;width:210px;margin:0;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line-dark);box-shadow:0 24px 48px -20px rgba(0,184,176,.35);z-index:2}
+.kiside .chip img{display:block;width:100%;height:auto}
+.kiside .approve{margin-top:150px;padding-right:var(--s4)}
+@media (max-width:960px){.kiside .chip{position:static;width:180px}.kiside .approve{margin-top:0}}
 .approve{padding:var(--s4);display:flex;flex-direction:column;gap:var(--s2)}
 .approve .msg{background:rgba(0,184,176,.1);border:1px solid rgba(0,184,176,.25);border-radius:var(--r-md);padding:var(--s2) 18px;font-size:15.5px;color:var(--on-dark)}
 .approve .msg b{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:6px}

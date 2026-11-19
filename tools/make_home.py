@@ -19,17 +19,15 @@ I = {  # Strichsymbole 24x24
 }
 def ic(n, s=26, cls="ic"): return f'<svg class="{cls}" width="{s}" height="{s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{I[n]}</svg>'
 ARROW = ic("arrow", 18, "")
-def pic(name, alt="", r=""):
-    return (f'<picture><source srcset="{r}assets/img/{name}-dark.jpg" media="(prefers-color-scheme: dark)">'
-            f'<img src="{r}assets/img/{name}-light.jpg" alt="{alt}" loading="lazy" decoding="async"></picture>')
+PHOTO = {"hero-enterprise": (741, 268), "tech-platform": (742, 268), "ki-chip": (242, 223), "dashboard-laptop": (642, 223), "beratung": (573, 223),
+         "svc-erp": (487, 108), "svc-s4": (480, 108), "svc-dyn": (485, 108), "svc-ora": (487, 110), "svc-cut": (480, 110), "svc-ki": (485, 110)}
 
-def srcset(name, widths, r):
-    return ", ".join(f"{r}assets/img/{name}-{w}.webp {w}w" for w in widths)
-
-def img(name, widths, sizes, alt, r, cls="", eager=False):
-    return (f'<picture><source type="image/webp" srcset="{srcset(name, widths, r)}" sizes="{sizes}">'
-            f'<img src="{r}assets/img/{name}.jpg" alt="{alt}" width="{widths[-1]}" height="{round(widths[-1] * (1100/1600 if widths[-1] == 1600 else 480/840))}"'
-            f'{"" if eager else " loading=\"lazy\""} decoding="async"{f" class=\"{cls}\"" if cls else ""}{" fetchpriority=\"high\"" if eager else ""}></picture>')
+def photo(name, alt, r, eager=False):
+    """Bild aus der STEGARC-Bildwelt (assets/photo): WebP mit JPEG-Fallback."""
+    w, h = PHOTO[name]
+    return (f'<picture><source type="image/webp" srcset="{r}assets/photo/{name}.webp">'
+            f'<img src="{r}assets/photo/{name}.jpg" alt="{alt}" width="{w}" height="{h}"'
+            f'{" fetchpriority=\"high\"" if eager else " loading=\"lazy\""} decoding="async"></picture>')
 
 def appmock(t):
     m = t["mock"]
@@ -45,7 +43,7 @@ def appmock(t):
 
 def page(L, r):
     t = L; a = t["anchors"]
-    svc = "".join(f'<article class="card reveal"><div class="pic" aria-hidden="true">{img(pic + "-light", (420, 840), "(max-width:680px) 90vw, (max-width:1100px) 45vw, 400px", "", r)}</div>{ic(icon, 32)}<h3>{h}</h3><p>{p}</p>{f"""<a class="more" href="{lk[0]}">{lk[1]} {ic("arrow", 16, "")}</a>""" if lk else ""}</article>'
+    svc = "".join(f'<article class="card reveal"><div class="band" aria-hidden="true">{photo(pic.replace("card-", "svc-"), "", r)}</div><div class="body"><h3>{h}</h3><p>{p}</p>{f"""<a class="more" href="{lk[0]}">{lk[1]} {ic("arrow", 16, "")}</a>""" if lk else ""}</div></article>'
                   for icon, pic, h, p, lk in t["svc2"])
     extra = '<div class="card extra reveal"><h3>' + t["extra_label"] + '</h3>' + "".join(f'<div>{ic(i, 28)}<span><b>{h}</b>{p}</span></div>' for i, h, p in t["extra1"]) + '</div>'
     also = t["also"] + " " + ", ".join(f"<b>{h}</b>" for i, h, p in t["extra2"]) + "."
@@ -63,7 +61,7 @@ def page(L, r):
     h2 = "".join(f"<span>{x}</span>" for x in t["tech_h"])
     return f'''<!--META {json.dumps(t["meta"], ensure_ascii=False)}-->
 <section class="hero" aria-labelledby="hero-h">
-  <div class="art" aria-hidden="true">{img("hero-light", (800, 1600), "(max-width:960px) 100vw, 58vw", "", r, eager=True)}</div>
+  <div class="art" aria-hidden="true">{photo("hero-enterprise", "", r, eager=True)}</div>
   <div class="wrap">
     <div class="copy">
       <div class="eyebrow">{t["eyebrow"]}</div>
@@ -92,7 +90,7 @@ def page(L, r):
 </section>
 
 <section class="section dark tech" id="{a["platform"]}" aria-labelledby="tech-h">
-  <div class="bgart" aria-hidden="true">{img("tech-dark", (800, 1600), "100vw", "", r)}</div>
+  <div class="bgart" aria-hidden="true">{photo("tech-platform", "", r)}</div>
   <div class="wrap">
     <div class="grid">
       <div class="reveal">
@@ -110,12 +108,12 @@ def page(L, r):
 <section class="section dark" id="{a["ai"]}" aria-labelledby="ai-h" style="padding-top:0">
   <div class="wrap split">
     <div class="reveal"><div class="eyebrow">{t["ai_eyebrow"]}</div><h2 id="ai-h">{t["ai_h"]}</h2><p class="intro">{t["ai_p"]}</p><ul class="uses">{uses}</ul></div>
-    <div class="card approve reveal" role="group" aria-label="{t["ap_label"]}">
+    <div class="kiside reveal"><figure class="chip">{photo("ki-chip", "", r)}</figure><div class="card approve" role="group" aria-label="{t["ap_label"]}">
       <div class="msg"><b>{t["ap_h"]}</b>{t["ap_msg"]}</div>
       <dl>{"".join(f"<dt>{k}</dt><dd>{v}</dd>" for k, v in t["ap_dl"])}</dl>
       <div class="acts" aria-hidden="true"><span class="yes">{t["ap_yes"]}</span><span>{t["ap_no"]}</span></div>
       <p class="note">{t["ap_note"]}</p>
-    </div>
+    </div></div>
   </div>
 </section>
 
