@@ -18,10 +18,13 @@
 <meta property="og:locale" content="de_DE">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="author" content="Marcel Wagner">
-<meta name="theme-color" content="#f4f7f8" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#06121c" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F8F9FA">
 <link rel="icon" href="../assets/logo.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/inter-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/style.css">
+<script>document.documentElement.classList.add("js")</script>
+<script src="../assets/site.js" defer></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfessionalService", "@id": "https://marcelwagner-afk.github.io/stegarc-homepage/#org", "name": "Marcel Wagner – STEGARC", "url": "https://marcelwagner-afk.github.io/stegarc-homepage/", "email": "marcel.wagner@w-dfs.de", "telephone": "+491791600252", "image": "https://marcelwagner-afk.github.io/stegarc-homepage/assets/og.jpg", "logo": "https://marcelwagner-afk.github.io/stegarc-homepage/assets/logo.svg", "founder": {"@type": "Person", "name": "Marcel Wagner", "jobTitle": "Inhaber"}, "address": {"@type": "PostalAddress", "streetAddress": "Eichendorffstr. 38", "postalCode": "75031", "addressLocality": "Eppingen", "addressRegion": "Baden-Württemberg", "addressCountry": "DE"}, "areaServed": ["DE", "AT", "CH", "EU"], "knowsLanguage": ["de", "en", "fr"], "knowsAbout": ["SAP S/4HANA", "SAP ECC", "RISE with SAP", "Cutover-Management", "SAP-Lizenzoptimierung", "SAP SuccessFactors", "Künstliche Intelligenz im ERP", "Individuelle Softwareentwicklung", "Systemintegration"]}</script>
 </head>
 <body>
@@ -29,9 +32,8 @@
 <header class="top">
   <div class="wrap">
     <a class="brand" href="../" aria-label="STEGARC – Startseite">STEGARC</a>
-    <nav class="nav" aria-label="Navigation"><a href="../#leistungen">Leistungen</a><a href="../#vorgehen">Vorgehen</a><a href="../#projekte">Projekte</a><a href="../#plattform">STEGARC</a><a href="../#ueber">Über mich</a></nav>
-    <a class="lang" href="../en/blog/index.html" hreflang="en" lang="en" title="English">EN</a>
-    <a class="btn pri" href="../#kontakt">Kontakt</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" data-open="Menü öffnen" data-close="Menü schließen"><span class="sr">Menü öffnen</span><i></i><i></i></button>
+    <nav class="nav" id="menu" aria-label="Hauptnavigation"><a class="link" href="../#leistungen">Leistungen</a><a class="link" href="../#vorgehen">Vorgehen</a><a class="link" href="../#projekte">Projekte</a><a class="link" href="../#plattform">STEGARC</a><a class="link" href="../#ueber">Über mich</a><a class="lang" href="../en/blog/index.html" hreflang="en" lang="en" title="English">EN</a><a class="btn btn-primary" href="../#kontakt">Kontakt</a></nav>
   </div>
 </header>
 <main id="inhalt">
@@ -39,8 +41,8 @@
 </main>
 <footer>
   <div class="wrap">
-    <span>© 2026 Marcel Wagner – STEGARC, Eichendorffstr. 38, 75031 Eppingen</span>
-    <nav aria-label="Legal"><a href="../impressum.html">Impressum</a><a href="../datenschutz.html">Datenschutz</a><a href="../blog/">Blog</a></nav>
+    <a class="brand" href="../">STEGARC</a><span>© 2026 Marcel Wagner – STEGARC, Eichendorffstr. 38, 75031 Eppingen</span>
+    <nav aria-label="Rechtliches"><a href="../impressum.html">Impressum</a><a href="../datenschutz.html">Datenschutz</a><a href="../blog/">Blog</a></nav>
   </div>
 </footer>
 </body>

@@ -30,7 +30,7 @@ T = {
            "blog_lead": "Praxiswissen aus SAP-Transformationen – ehrlich, konkret und ohne Marketing-Nebel.",
            "read": "Min. Lesezeit", "by": "von Marcel Wagner", "more": "Weiterlesen", "related": "Weitere Beiträge", "updated": "aktualisiert",
            "cta_h": "Sie stehen vor einer ähnlichen Entscheidung?", "cta_p": "Schildern Sie kurz Ihre Ausgangslage – ich melde mich mit einem Vorschlag für ein erstes Gespräch.",
-           "cta_b": "Gespräch vereinbaren", "date": lambda d: f"{int(d[8:10])}. {MON['de'][int(d[5:7]) - 1]} {d[:4]}", "locale": "de_DE"},
+           "cta_b": "Gespräch vereinbaren", "menu_open": "Menü öffnen", "menu_close": "Menü schließen", "nav_label": "Hauptnavigation", "legal_label": "Rechtliches", "date": lambda d: f"{int(d[8:10])}. {MON['de'][int(d[5:7]) - 1]} {d[:4]}", "locale": "de_DE"},
     "en": {"nav": [("#services", "Services"), ("#approach", "Approach"), ("#projects", "Projects"), ("#platform", "STEGARC"), ("#about", "About me")],
            "contact": "Contact", "anchor": "contact", "skip": "Skip to content", "home": "Home",
            "legal": [("legal-notice.html", "Legal notice"), ("privacy.html", "Privacy")],
@@ -39,7 +39,7 @@ T = {
            "blog_lead": "Practical knowledge from SAP transformations – honest, specific and free of marketing fog.",
            "read": "min read", "by": "by Marcel Wagner", "more": "Read more", "related": "More articles", "updated": "updated",
            "cta_h": "Facing a similar decision?", "cta_p": "Briefly describe your situation – I will get back to you with a proposal for a first conversation.",
-           "cta_b": "Book a conversation", "date": lambda d: f"{int(d[8:10])} {MON['en'][int(d[5:7]) - 1]} {d[:4]}", "locale": "en_GB"},
+           "cta_b": "Book a conversation", "menu_open": "Open menu", "menu_close": "Close menu", "nav_label": "Main navigation", "legal_label": "Legal", "date": lambda d: f"{int(d[8:10])} {MON['en'][int(d[5:7]) - 1]} {d[:4]}", "locale": "en_GB"},
 }
 
 def read(p):
@@ -68,12 +68,13 @@ def post_body(lang, out, m, body, posts, start):
   <div class="prose">
 {body}
   </div>
-  <aside class="post-cta"><h2>{t["cta_h"]}</h2><p>{t["cta_p"]}</p><a class="btn pri" href="{start}#{t["anchor"]}">{t["cta_b"]}</a></aside>
+  <aside class="post-cta"><h2>{t["cta_h"]}</h2><p>{t["cta_p"]}</p><a class="btn btn-primary" href="{start}#{t["anchor"]}">{t["cta_b"]}</a></aside>
 </article>
 <section class="related"><div class="wrap"><h2>{t["related"]}</h2><ul class="posts">{others}</ul></div></section>'''
 
 def render(lang, out, m, body, posts):
-    t = T[lang]; r = "../" * out.count("/"); start = r + ("" if lang == "de" else "en/")
+    t = T[lang]; r = "../" * out.count("/"); start = r + ("" if lang == "de" else "en/") or "./"
+    hp = "" if m.get("type") == "home" else start
     url = BASE + out.replace("index.html", ""); alt = m.get("alt"); other = "en" if lang == "de" else "de"
     body = body.replace("<!--POSTS-->", "".join(card(lang, rp, mm, start) for o, rp, mm in posts[lang][:3]))
     org = {"@context": "https://schema.org", "@type": "ProfessionalService", "@id": BASE + "#org", "name": NAME, "url": BASE, **CONTACT,
@@ -96,7 +97,7 @@ def render(lang, out, m, body, posts):
     if alt:
         de_url, en_url = (url, BASE + alt.replace("index.html", "")) if lang == "de" else (BASE + alt.replace("index.html", ""), url)
         alts = f'<link rel="alternate" hreflang="de" href="{de_url}">\n<link rel="alternate" hreflang="en" href="{en_url}">\n<link rel="alternate" hreflang="x-default" href="{de_url}">\n'
-    navs = "".join(f'<a href="{start + h}">{n}</a>' for h, n in t["nav"])
+    navs = "".join(f'<a class="link" href="{hp + h}">{n}</a>' for h, n in t["nav"])
     lsw = (f'<a class="lang" href="{r + alt}" hreflang="{other}" lang="{other}" title="{"English" if other == "en" else "Deutsch"}">'
            f'{other.upper()}</a>') if alt else ""
     legal = "".join(f'<a href="{start + h}">{n}</a>' for h, n in t["legal"])
@@ -117,9 +118,13 @@ def render(lang, out, m, body, posts):
 <meta property="og:locale" content="{t["locale"]}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="author" content="Marcel Wagner">
-<meta name="theme-color" content="#f4f7f8" media="(prefers-color-scheme: light)">\n<meta name="theme-color" content="#06121c" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F8F9FA">
 <link rel="icon" href="{r}assets/logo.svg" type="image/svg+xml">
+<link rel="preload" href="{r}assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{r}assets/fonts/inter-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{r}assets/style.css">
+<script>document.documentElement.classList.add("js")</script>
+<script src="{r}assets/site.js" defer></script>
 <script type="application/ld+json">{json.dumps(ld if len(ld) > 1 else org, ensure_ascii=False)}</script>
 </head>
 <body>
@@ -127,9 +132,8 @@ def render(lang, out, m, body, posts):
 <header class="top">
   <div class="wrap">
     <a class="brand" href="{start}" aria-label="STEGARC – {t["home"]}">STEGARC</a>
-    <nav class="nav" aria-label="Navigation">{navs}</nav>
-    {lsw}
-    <a class="btn pri" href="{start}#{t["anchor"]}">{t["contact"]}</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" data-open="{t["menu_open"]}" data-close="{t["menu_close"]}"><span class="sr">{t["menu_open"]}</span><i></i><i></i></button>
+    <nav class="nav" id="menu" aria-label="{t["nav_label"]}">{navs}{lsw}<a class="btn btn-primary" href="{hp}#{t["anchor"]}">{t["contact"]}</a></nav>
   </div>
 </header>
 <main id="inhalt">
@@ -137,8 +141,8 @@ def render(lang, out, m, body, posts):
 </main>
 <footer>
   <div class="wrap">
-    <span>© 2026 {NAME}, Eichendorffstr. 38, 75031 Eppingen</span>
-    <nav aria-label="Legal">{legal}<a href="{start}blog/">Blog</a></nav>
+    <a class="brand" href="{start}">STEGARC</a><span>© 2026 {NAME}, Eichendorffstr. 38, 75031 Eppingen</span>
+    <nav aria-label="{t["legal_label"]}">{legal}<a href="{start}blog/">Blog</a></nav>
   </div>
 </footer>
 </body>

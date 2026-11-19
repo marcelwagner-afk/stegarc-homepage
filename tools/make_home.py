@@ -23,143 +23,158 @@ def pic(name, alt="", r=""):
     return (f'<picture><source srcset="{r}assets/img/{name}-dark.jpg" media="(prefers-color-scheme: dark)">'
             f'<img src="{r}assets/img/{name}-light.jpg" alt="{alt}" loading="lazy" decoding="async"></picture>')
 
+def srcset(name, widths, r):
+    return ", ".join(f"{r}assets/img/{name}-{w}.webp {w}w" for w in widths)
+
+def img(name, widths, sizes, alt, r, cls="", eager=False):
+    return (f'<picture><source type="image/webp" srcset="{srcset(name, widths, r)}" sizes="{sizes}">'
+            f'<img src="{r}assets/img/{name}.jpg" alt="{alt}" width="{widths[-1]}" height="{round(widths[-1] * (1100/1600 if widths[-1] == 1600 else 480/840))}"'
+            f'{"" if eager else " loading=\"lazy\""} decoding="async"{f" class=\"{cls}\"" if cls else ""}{" fetchpriority=\"high\"" if eager else ""}></picture>')
+
+def appmock(t):
+    m = t["mock"]
+    rows = "".join(f'<div><span>{n}</span><span class="bar"><i style="width:{v}%"></i></span><span>{v} %</span></div>' for n, v in m["rows"])
+    nav = "".join(f'<span{" class=\"on\"" if i == 0 else ""}>{x}</span>' for i, x in enumerate(m["nav"]))
+    return (f'<div class="app" role="img" aria-label="{m["aria"]}"><aside><b>STEGARC</b>{nav}</aside><main><p class="ttl">{m["title"]}</p>'
+            f'<div class="tile"><small>{m["k1"]}</small><strong>82 %</strong><span class="bar"><i style="width:82%"></i></span></div>'
+            f'<div class="tile"><small>{m["k2"]}</small><strong>{m["k2v"]}</strong></div>'
+            f'<div class="tile"><small>{m["k3"]}</small><strong>98 % <span class="ok"><svg width="9" height="9" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.2 5 8.5 9.5 3.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></strong></div>'
+            f'<div class="tile wide"><small>{m["k4"]}</small><div class="rows">{rows}</div></div>'
+            f'<div class="tile"><small>{m["k5"]}</small><svg class="spark" viewBox="0 0 120 60" aria-hidden="true"><path d="M0 52 L15 46 L28 48 L40 38 L55 40 L68 28 L80 30 L92 18 L106 20 L120 6" fill="none" stroke="#00B8B0" stroke-width="2.5" stroke-linejoin="round"/><path d="M0 52 L15 46 L28 48 L40 38 L55 40 L68 28 L80 30 L92 18 L106 20 L120 6 L120 60 L0 60Z" fill="rgba(0,184,176,.12)"/></svg></div>'
+            f'</main></div>')
+
 def page(L, r):
-    t = L
-    svc = "".join(f'<article class="card"><div class="pic" aria-hidden="true">{pic(img, "", r)}</div>{ic(icon, 30)}<h3>{h}</h3><p>{p}</p>{f"""<a class="more" href="{lk[0]}">{lk[1]}</a>""" if lk else ""}</article>'
-                  for icon, img, h, p, lk in t["svc"])
-    extra = lambda items, label: f'<div class="card extra"><b>{label}</b>' + "".join(f'<div>{ic(i, 26)}<span><b>{h}</b>{p}</span></div>' for i, h, p in items) + '</div>'
-    feats = "".join(f'<div class="feat">{ic(i, 34)}<span><b>{h}</b>{p}</span></div>' for i, h, p in t["feats"])
-    cases = "".join(f'<div><b>{h}</b><span>{p}</span></div>' for h, p in t["cases"])
+    t = L; a = t["anchors"]
+    svc = "".join(f'<article class="card reveal"><div class="pic" aria-hidden="true">{img(pic + "-light", (420, 840), "(max-width:680px) 90vw, (max-width:1100px) 45vw, 400px", "", r)}</div>{ic(icon, 32)}<h3>{h}</h3><p>{p}</p>{f"""<a class="more" href="{lk[0]}">{lk[1]} {ic("arrow", 16, "")}</a>""" if lk else ""}</article>'
+                  for icon, pic, h, p, lk in t["svc2"])
+    extra = '<div class="card extra reveal"><h3>' + t["extra_label"] + '</h3>' + "".join(f'<div>{ic(i, 28)}<span><b>{h}</b>{p}</span></div>' for i, h, p in t["extra1"]) + '</div>'
+    also = t["also"] + " " + ", ".join(f"<b>{h}</b>" for i, h, p in t["extra2"]) + "."
+    feats = "".join(f'<div class="feat">{ic(i, 32)}<span><b>{h}</b>{p}</span></div>' for i, h, p in t["feats"])
+    cases = "".join(f'<div class="card"><b>{h}</b><span>{p}</span></div>' for h, p in t["cases"])
     uses = "".join(f'<li>{ic("check", 18, "")}<span><b>{h}</b> {p}</span></li>' for h, p in t["uses"])
-    steps = "".join(f'<li class="card"><b>{h}</b><span>{p}</span></li>' for h, p in t["steps"])
+    steps = "".join(f'<li><b>{h}</b><span>{p}</span></li>' for h, p in t["steps"])
     work = "".join(f'<li><span class="who">{w}</span><span class="what"><b>{h}</b><span>{p}</span></span><span class="role">{ro}</span></li>' for w, h, p, ro in t["work"])
-    mods = "".join(f'<li>{ic("check", 18, "")}<span><b>{h}</b> {p}</span></li>' for h, p in t["mods"])
+    caps = "".join(f'<li>{ic("check", 20, "")}<span><b>{h.rstrip(":")}</b>{p}</span></li>' for h, p in t["mods"])
     tl = "".join(f'<li><b>{h}</b><span>{p}</span></li>' for h, p in t["timeline"])
     skills = "".join(f"<span>{x}</span>" for x in t["skills"])
-    faq = "".join(f"<details><summary>{q}</summary><p>{a}</p></details>" for q, a, _ in t["faq"])
-    faqld = json.dumps({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": s}} for q, a, s in t["faq"]]}, ensure_ascii=False)
+    faq = "".join(f"<details><summary>{q}</summary><p>{ans}</p></details>" for q, ans, _ in t["faq"])
+    faqld = json.dumps({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": s}} for q, ans, s in t["faq"]]}, ensure_ascii=False)
     about = "".join(f'<p{" class=\"first\"" if i == 0 else ""}>{x}</p>' for i, x in enumerate(t["about"]))
-    a = t["anchors"]
+    h2 = "".join(f"<span>{x}</span>" for x in t["tech_h"])
     return f'''<!--META {json.dumps(t["meta"], ensure_ascii=False)}-->
-<section class="hero">
-  <div class="art" aria-hidden="true">{pic("hero", "", r)}</div>
+<section class="hero" aria-labelledby="hero-h">
+  <div class="art" aria-hidden="true">{img("hero-light", (800, 1600), "(max-width:960px) 100vw, 58vw", "", r, eager=True)}</div>
   <div class="wrap">
     <div class="copy">
       <div class="eyebrow">{t["eyebrow"]}</div>
-      <h1>{t["h1a"]}<br><span class="accent">{t["h1b"]}</span></h1>
-      <p class="lead">{t["lead"]}</p>
-      <div class="cta"><a class="btn pri" href="#{a["contact"]}">{t["cta"]} {ARROW}</a></div>
+      <h1 id="hero-h">{t["h1a"]}<br><span class="accent">{t["h1b"]}</span></h1>
+      <p class="lead">{t["lead2"]}</p>
+      <div class="cta"><a class="btn btn-primary" href="#{a["contact"]}">{t["cta"]} {ARROW}</a><a class="btn btn-secondary" href="#{a["services"]}">{t["cta2"]}</a></div>
     </div>
     <div class="feats">{feats}</div>
   </div>
 </section>
 
-<section class="praxis">
+<section class="praxis" aria-labelledby="praxis-h">
   <div class="wrap">
-    <figure class="laptop"><div class="screen"><img src="{r}assets/stegarc-demo-{t["lang"]}.jpg" width="1600" height="965" alt="{t["shot_alt"]}" loading="lazy"></div><div class="base" aria-hidden="true"></div><figcaption>{t["shot_cap"]}</figcaption></figure>
-    <div class="card"><div class="rule" aria-hidden="true"></div><h2>{t["praxis_h"]}</h2><p>{t["praxis_p"]}</p><div class="cta"><a class="btn line" href="https://marcelwagner-afk.github.io/stegarc-suite/index.html{t["demo_q"]}">{t["demo_b"]}</a></div></div>
+    <figure class="laptop reveal"><div class="lid">{appmock(t)}</div><div class="base" aria-hidden="true"></div><figcaption>{t["mock"]["cap"]}</figcaption></figure>
+    <div class="card reveal"><div class="rule" aria-hidden="true"></div><h2 id="praxis-h">{t["praxis_h"]}</h2><p>{t["praxis_p2"]}</p><div class="cta"><a class="btn btn-secondary" href="#{a["approach"]}">{t["praxis_b"]}</a></div></div>
   </div>
 </section>
 
-<section class="sec" id="{a["services"]}">
+<section class="section" id="{a["services"]}" aria-labelledby="svc-h">
   <div class="wrap">
-    <div class="head"><div class="eyebrow">{t["svc_eyebrow"]}</div><h2>{t["svc_h"]}</h2><p class="intro">{t["svc_p"]}</p></div>
+    <div class="head reveal"><div class="eyebrow">{t["svc_eyebrow"]}</div><h2 id="svc-h">{t["svc_h"]}</h2><p class="intro">{t["svc_p"]}</p></div>
     <div class="svc">{svc}</div>
-    {extra(t["extra1"] + t["extra2"], t["extra_label"])}
+    {extra}
+    <p class="also reveal">{also}</p>
   </div>
 </section>
 
-<section class="feature">
+<section class="section dark tech" id="{a["platform"]}" aria-labelledby="tech-h">
+  <div class="bgart" aria-hidden="true">{img("tech-dark", (800, 1600), "100vw", "", r)}</div>
   <div class="wrap">
-    <div class="pic" aria-hidden="true"><img src="{r}assets/img/card-cut-dark.jpg" alt="" loading="lazy"></div>
-    <div class="txt"><div class="eyebrow">{t["fx_eyebrow"]}</div><h2>{t["fx_h"]}</h2><p>{t["fx_p"]}</p><div class="cta"><a class="btn pri" href="#{a["contact"]}">{t["cta"]} {ARROW}</a></div></div>
-  </div>
-</section>
-
-<section class="sec" id="{a["custom"]}">
-  <div class="wrap">
-    <div class="feature" style="border-radius:16px;padding:56px 48px;background:var(--band)">
-      <div class="eyebrow" style="color:#22d3c5">{t["sl_eyebrow"]}</div>
-      <p class="no"><s>{t["sl_no"]}</s><em>{t["sl_yes"]}</em></p>
-      <p style="margin-top:24px;max-width:46em;font-size:17px">{t["sl_p"]}</p>
-      <div class="cases">{cases}</div>
-      <div class="cta"><a class="btn pri" href="#{a["contact"]}">{t["sl_cta"]} {ARROW}</a><a class="btn line" href="blog/{t["sl_blog"]}">{t["more_blog"]}</a></div>
+    <div class="grid">
+      <div class="reveal">
+        <div class="eyebrow">{t["tech_eyebrow"]}</div>
+        <h2 id="tech-h">{h2}</h2>
+        <p class="intro">{t["pf_p"]}</p>
+        <ul class="caps">{caps}</ul>
+        <div class="cta"><a class="btn btn-primary" href="https://marcelwagner-afk.github.io/stegarc-suite/index.html{t["demo_q"]}">{t["demo_b"]} {ARROW}</a><a class="btn btn-secondary" href="https://marcelwagner-afk.github.io/stegarc-suite/{t["product"]}">{t["product_b"]}</a></div>
+      </div>
+      <figure class="monitor reveal"><div class="screen"><img src="{r}assets/stegarc-demo-{t["lang"]}.jpg" width="1600" height="965" alt="{t["shot_alt"]}" loading="lazy" decoding="async"></div><div class="stand" aria-hidden="true"></div><figcaption>{t["shot_cap"]}</figcaption></figure>
     </div>
   </div>
 </section>
 
-<section class="sec" id="{a["ai"]}" style="padding-top:0">
+<section class="section dark" id="{a["ai"]}" aria-labelledby="ai-h" style="padding-top:0">
   <div class="wrap split">
-    <div>
-      <div class="eyebrow">{t["ai_eyebrow"]}</div><h2>{t["ai_h"]}</h2><p class="intro">{t["ai_p"]}</p>
-      <ul class="uses">{uses}</ul>
-    </div>
-    <div class="card approve" aria-label="{t["ap_label"]}">
+    <div class="reveal"><div class="eyebrow">{t["ai_eyebrow"]}</div><h2 id="ai-h">{t["ai_h"]}</h2><p class="intro">{t["ai_p"]}</p><ul class="uses">{uses}</ul></div>
+    <div class="card approve reveal" role="group" aria-label="{t["ap_label"]}">
       <div class="msg"><b>{t["ap_h"]}</b>{t["ap_msg"]}</div>
       <dl>{"".join(f"<dt>{k}</dt><dd>{v}</dd>" for k, v in t["ap_dl"])}</dl>
-      <div class="acts"><span class="yes">{t["ap_yes"]}</span><span>{t["ap_no"]}</span></div>
+      <div class="acts" aria-hidden="true"><span class="yes">{t["ap_yes"]}</span><span>{t["ap_no"]}</span></div>
       <p class="note">{t["ap_note"]}</p>
     </div>
   </div>
 </section>
 
-<section class="sec" id="{a["approach"]}" style="background:var(--bg-2);border-block:1px solid var(--line)">
+<section class="section" id="{a["custom"]}" aria-labelledby="sl-h">
   <div class="wrap">
-    <div class="head"><div class="eyebrow">{t["st_eyebrow"]}</div><h2>{t["st_h"]}</h2><p class="intro">{t["st_p"]}</p></div>
-    <ol class="steps">{steps}</ol>
+    <div class="reveal"><div class="eyebrow">{t["sl_eyebrow"]}</div>
+      <h2 id="sl-h" class="no"><s>{t["sl_no"]}</s><em>{t["sl_yes"]}</em></h2>
+      <p class="intro" style="margin-top:24px">{t["sl_p"]}</p></div>
+    <div class="cases reveal">{cases}</div>
+    <div class="cta reveal"><a class="btn btn-primary" href="#{a["contact"]}">{t["sl_cta"]} {ARROW}</a><a class="btn btn-secondary" href="blog/{t["sl_blog"]}">{t["more_blog"]}</a></div>
   </div>
 </section>
 
-<section class="sec" id="{a["projects"]}">
+<section class="section alt" id="{a["approach"]}" aria-labelledby="st-h">
   <div class="wrap">
-    <div class="head"><div class="eyebrow">{t["pj_eyebrow"]}</div><h2>{t["pj_h"]}</h2><p class="intro">{t["pj_p"]}</p></div>
-    <div class="card work"><ul>{work}</ul></div>
+    <div class="head reveal"><div class="eyebrow">{t["st_eyebrow"]}</div><h2 id="st-h">{t["st_h"]}</h2><p class="intro">{t["st_p"]}</p></div>
+    <ol class="steps reveal">{steps}</ol>
+  </div>
+</section>
+
+<section class="section" id="{a["projects"]}" aria-labelledby="pj-h">
+  <div class="wrap">
+    <div class="head reveal"><div class="eyebrow">{t["fx_eyebrow"]}</div><h2 id="pj-h">{t["fx_h"]}</h2><p class="intro">{t["pj_p2"]}</p></div>
+    <div class="card work reveal"><ul>{work}</ul></div>
     <p class="fine">{t["pj_fine"]}</p>
   </div>
 </section>
 
-<section class="sec" id="{a["platform"]}" style="padding-top:0">
-  <div class="wrap split">
-    <div>
-      <div class="eyebrow">{t["pf_eyebrow"]}</div><h2>{t["pf_h"]}</h2><p class="intro">{t["pf_p"]}</p>
-      <ul class="modules">{mods}</ul>
-      <div class="cta"><a class="btn pri" href="https://marcelwagner-afk.github.io/stegarc-suite/index.html{t["demo_q"]}">{t["demo_b"]} {ARROW}</a><a class="btn line" href="https://marcelwagner-afk.github.io/stegarc-suite/{t["product"]}">{t["product_b"]}</a></div>
-    </div>
-    <figure class="card shot"><img src="{r}assets/stegarc-pe-{t["lang"]}.jpg" width="1600" height="965" alt="{t["pf_alt"]}" loading="lazy"><figcaption>{t["pf_cap"]}</figcaption></figure>
-  </div>
-</section>
-
-<section class="sec" id="{a["about"]}" style="background:var(--bg-2);border-block:1px solid var(--line)">
+<section class="section alt" id="{a["about"]}" aria-labelledby="ab-h">
   <div class="wrap about">
-    <div class="body"><div class="eyebrow">{t["ab_eyebrow"]}</div><h2 style="margin-bottom:22px">Marcel Wagner</h2>{about}</div>
-    <div class="card side">
+    <div class="body reveal"><div class="eyebrow">{t["ab_eyebrow"]}</div><h2 id="ab-h" style="margin-bottom:24px">Marcel Wagner</h2>{about}</div>
+    <aside class="card side reveal">
       <div><h3>{t["tl_h"]}</h3><ol class="timeline">{tl}</ol></div>
       <div><h3>{t["sk_h"]}</h3><div class="skills">{skills}</div></div>
       <div><h3>{t["lg_h"]}</h3><p style="color:var(--ink-2)">{t["lg"]}</p></div>
-    </div>
+    </aside>
   </div>
 </section>
 
-<section class="sec" id="blog-teaser">
+<section class="section" id="blog-teaser" aria-labelledby="bl-h">
   <div class="wrap">
-    <div class="head rowhead"><div><div class="eyebrow">Blog</div><h2>{t["blog_h"]}</h2></div><a class="btn line" href="blog/">{t["blog_all"]}</a></div>
+    <div class="head rowhead reveal"><div><div class="eyebrow">Blog</div><h2 id="bl-h">{t["blog_h"]}</h2></div><a class="btn btn-secondary" href="blog/">{t["blog_all"]}</a></div>
     <ul class="posts"><!--POSTS--></ul>
   </div>
 </section>
 
-<section class="sec" id="faq" style="padding-top:0">
+<section class="section" id="faq" aria-labelledby="faq-h" style="padding-top:0">
   <div class="wrap">
-    <div class="head"><div class="eyebrow">FAQ</div><h2>{t["faq_h"]}</h2></div>
+    <div class="head reveal"><div class="eyebrow">FAQ</div><h2 id="faq-h">{t["faq_h"]}</h2></div>
     <div class="faq">{faq}</div>
   </div>
   <script type="application/ld+json">{faqld}</script>
 </section>
 
-<section class="sec contactband" id="{a["contact"]}">
+<section class="section dark" id="{a["contact"]}" aria-labelledby="ct-h">
   <div class="wrap contact">
-    <div><div class="eyebrow">{t["ct_eyebrow"]}</div><h2>{t["ct_h"]}</h2><p class="intro">{t["ct_p"]}</p>
-      <div class="cta"><a class="btn pri" href="mailto:marcel.wagner@w-dfs.de?subject={t["ct_subj"]}">{t["ct_mail"]} {ARROW}</a><a class="btn line" href="tel:+491791600252">{t["ct_call"]}</a></div></div>
-    <dl>{"".join(f"<dt>{k}</dt><dd>{v}</dd>" for k, v in t["ct_dl"])}</dl>
+    <div class="reveal"><div class="eyebrow">{t["ct_eyebrow"]}</div><h2 id="ct-h">{t["ct_h"]}</h2><p class="intro">{t["ct_p"]}</p>
+      <div class="cta"><a class="btn btn-primary" href="mailto:marcel.wagner@w-dfs.de?subject={t["ct_subj"]}">{t["ct_mail"]} {ARROW}</a><a class="btn btn-secondary" href="tel:+491791600252">{t["ct_call"]}</a></div></div>
+    <dl class="reveal">{"".join(f"<dt>{k}</dt><dd>{v}</dd>" for k, v in t["ct_dl"])}</dl>
   </div>
 </section>
 '''
@@ -299,6 +314,42 @@ EN = dict(lang="en", meta={"type": "home", "title": "ERP transformation, custom 
   ct_eyebrow="Contact", ct_h="Tell me where things are stuck.", ct_p="An ERP decision, a running project, a special requirement or an AI idea: I will get back to you with a proposal for a first, free conversation.",
   ct_subj="Enquiry%20via%20the%20website", ct_mail="Send an e-mail", ct_call="Call",
   ct_dl=[("Name", "Marcel Wagner"), ("E-mail", '<a href="mailto:marcel.wagner@w-dfs.de">marcel.wagner@w-dfs.de</a>'), ("Mobile", '<a href="tel:+491791600252">+49 179 1600252</a>'), ("Address", "Eichendorffstr. 38, 75031 Eppingen, Germany")])
+
+
+DE.update(
+  lead2="Herstellerunabhängige ERP-Transformation, komplexe Systemlandschaften, Datenintegration, Cutover und produktive KI-Lösungen – mit Erfahrung, Umsetzungskraft und messbaren Ergebnissen.",
+  cta2="Leistungen ansehen",
+  svc2=[("cube", "card-erp", "ERP-Transformation", "Strategie, Zielbild, Architektur und Umsetzung.", ("blog/rise-with-sap-oder-alternativen.html", "RISE oder Alternativen?")),
+        ("layers", "card-s4", "SAP S/4HANA", "Planung, Einführung, Conversion und Optimierung.", ("blog/sap-ecc-wartungsende-2027.html", "ECC-Wartungsende 2027")),
+        ("grid", "card-dyn", "Microsoft Dynamics", "Einführung, Harmonisierung und skalierbarer Rollout.", None),
+        ("db", "card-ora", "Oracle", "Einführung, Migration und Integration.", None),
+        ("play", "card-cut", "Cutover &amp; Go-live", "Planung, Orchestrierung und sicherer Produktivstart.", ("blog/cutover-planung-go-live.html", "Zehn Regeln für den Cutover")),
+        ("chip", "card-ki", "KI-Lösungen", "Pragmatische KI-Anwendungen mit messbarem Geschäftsnutzen.", ("blog/ki-im-erp-sinnvoll-einsetzen.html", "KI im ERP sinnvoll einsetzen"))],
+  also="Außerdem:",
+  praxis_p2="Transparente Steuerung, belastbare Daten und messbarer Projektfortschritt – für einen sicheren Go-live. Jeder Workstream, jede Datenmigration und jede Entscheidung bleibt nachvollziehbar.",
+  praxis_b="So arbeite ich",
+  mock=dict(aria="Konzeptdarstellung eines ERP-Programm-Cockpits mit Beispielwerten", title="ERP-Programm – Status", nav=["Übersicht", "Prozesse", "Daten", "Migration", "Cutover", "KI-Plattform", "Reporting"],
+            k1="Projektfortschritt", k2="Go-live", k2v="in 14 Tagen", k3="Datenmigration", k4="Fortschritt nach Workstream", k5="System-Readiness",
+            rows=[("S/4HANA", 85), ("Microsoft Dynamics", 79), ("Oracle", 90), ("Cutover", 80)], cap="Konzeptdarstellung mit Beispielwerten"),
+  tech_eyebrow="STEGARC Technology", tech_h=["Eine Plattform.", "Alle Systeme.", "Volle Kontrolle."],
+  pj_p2="Über 20 Jahre Programme in DAX-Konzernen und international tätigen Unternehmen – strukturiertes Vorgehen, starke Umsetzung und messbarer Nutzen, von der Konzeption bis zum Go-live. Und Sonderfälle im Mittelstand, für die es keine Standardantwort gab.")
+EN.update(
+  lead2="Vendor-independent ERP transformation, complex system landscapes, data integration, cutover and productive AI solutions – with experience, delivery strength and measurable results.",
+  cta2="See services",
+  svc2=[("cube", "card-erp", "ERP transformation", "Strategy, target picture, architecture and delivery.", ("blog/rise-with-sap-or-alternatives.html", "RISE or alternatives?")),
+        ("layers", "card-s4", "SAP S/4HANA", "Planning, implementation, conversion and optimisation.", ("blog/sap-ecc-end-of-maintenance-2027.html", "ECC end of maintenance 2027")),
+        ("grid", "card-dyn", "Microsoft Dynamics", "Implementation, harmonisation and scalable rollout.", None),
+        ("db", "card-ora", "Oracle", "Implementation, migration and integration.", None),
+        ("play", "card-cut", "Cutover &amp; go-live", "Planning, orchestration and a safe production start.", ("blog/cutover-planning-go-live.html", "Ten cutover rules")),
+        ("chip", "card-ki", "AI solutions", "Pragmatic AI applications with measurable business value.", ("blog/ai-in-erp-where-it-pays-off.html", "AI in ERP, done right"))],
+  also="Also:",
+  praxis_p2="Transparent steering, reliable data and measurable progress – for a safe go-live. Every workstream, every data migration and every decision stays traceable.",
+  praxis_b="How I work",
+  mock=dict(aria="Concept illustration of an ERP programme cockpit with sample values", title="ERP programme – status", nav=["Overview", "Processes", "Data", "Migration", "Cutover", "AI platform", "Reporting"],
+            k1="Project progress", k2="Go-live", k2v="in 14 days", k3="Data migration", k4="Progress by workstream", k5="System readiness",
+            rows=[("S/4HANA", 85), ("Microsoft Dynamics", 79), ("Oracle", 90), ("Cutover", 80)], cap="Concept illustration with sample values"),
+  tech_eyebrow="STEGARC Technology", tech_h=["One platform.", "All systems.", "Full control."],
+  pj_p2="More than 20 years of programmes at DAX-listed groups and internationally operating companies – a structured approach, strong delivery and measurable benefit, from concept to go-live. And special cases in mid-sized businesses that had no standard answer.")
 
 (ROOT / "content/de/index.html").write_text(page(DE, ""), encoding="utf-8")
 (ROOT / "content/en/index.html").write_text(page(EN, "../"), encoding="utf-8")
