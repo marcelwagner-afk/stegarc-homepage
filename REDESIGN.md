@@ -33,11 +33,11 @@ Bildmaterial kommt aus dem Ordner `stegarc_design_assets_pro`. Alle Motive stamm
 
 | Nr. | Sektion | Variante | Anker |
 |---|---|---|---|
-| 1 | Hero „Wo andere Nein sagen, fange ich an.“ mit Bild `hero-enterprise` | hell | – |
+| 1 | Hero „Wo andere Nein sagen, fange ich an.“ mit Bild `hero` | hell | – |
 | 2 | Praxis: Laptop mit HTML-Status-Mock und Karte „ERP-Transformation in der Praxis.“ | hell | – |
 | 3 | Leistungen: 6 Karten mit `svc-*`-Bildern, dazu ergänzende Schwerpunkte und eine „Außerdem“-Zeile | hell | `#leistungen` |
 | 4 | STEGARC Technology „Eine Plattform. Alle Systeme. Volle Kontrolle.“ mit dem echten Demo-Screenshot | dunkel | `#plattform` |
-| 5 | KI mit Bild `ki-chip` und Freigabe-Beispiel | dunkel | `#ki` |
+| 5 | KI mit Bild `dashboard` und Freigabe-Beispiel | dunkel | `#ki` |
 | 6 | Sonderlösungen | hell | – |
 | 7 | Vorgehen | hell | – |
 | 8 | Projekte | hell | – |
@@ -63,17 +63,23 @@ Es wurde nichts gelöscht.
 
 ## 6. Bilder (`assets/photo`)
 
-- Ausschnitte aus der STEGARC-Bildwelt, je als WebP mit JPEG-Fallback, mit festen `width`/`height`.
-- Alle Bilder außer dem Hero werden per Lazy Loading geladen.
-- Dekorative Bilder haben `alt=""` und `aria-hidden`.
+Alle Motive stammen aus der STEGARC-Bildwelt. Quelle sind 2560 px breite Dateien, hochskaliert aus 1536/1648 px.
 
-Bekannte Einschränkungen:
-- Die gelieferten Dateien sind klein (Hero 741×268 px). Auf großen und Retina-Displays wirkt der Hero deshalb weich. Für die Veröffentlichung sollten größere Einzelrenderings her, mindestens 2400 px breit für Hero und Technology.
-- Die Service-Bilder enthalten das Symbol bereits. Deshalb gibt es kein zusätzliches HTML-Icon.
-- `dashboard-laptop` und `beratung` sind vorbereitet, aber nicht eingebunden:
-  - Im Dashboard-Bild ist die Oberfläche unleserlich. Die HTML-Version bleibt deshalb lesbar und barrierefrei.
-  - Die Beratungsszene zeigt eine KI-generierte Person, die Besucher für Marcel Wagner halten könnten. Sie wird nur nach Freigabe genutzt, und dann als Symbolbild gekennzeichnet.
-- Die prozeduralen Grafiken (`tools/art`) werden nicht mehr verwendet. Die Werkzeuge bleiben für spätere Motive erhalten.
+| Motiv | Einsatz | Format |
+|---|---|---|
+| `hero` | heller Hero, vollflächig, links weich ausgeblendet | WebP 960 / 1600 / 2560 px per srcset, JPEG-Fallback |
+| `platform` | Hintergrund STEGARC Technology | WebP 960 / 1600 / 2560 px per srcset, JPEG-Fallback |
+| `dashboard` | Illustration im KI-Bereich, mit Alt-Text | WebP 960 / 1600 / 2560 px per srcset, JPEG-Fallback |
+| `connect` | Hintergrund Kontakt, stark abgedunkelt | WebP 960 / 1600 / 2560 px per srcset, JPEG-Fallback |
+| `svc-*` | Bildbänder der Leistungskarten; das Symbol ist im Bild, daher kein zweites HTML-Icon | gelieferte Größe (ca. 490 px) |
+
+Alle Bilder außer dem Hero werden per Lazy Loading geladen. Rein dekorative Bilder haben `alt=""` und `aria-hidden`. In der Plattform-Sektion bleibt der echte Demo-Screenshot.
+
+Nicht eingebunden:
+- `hero_dark_03` (Server) und `hero_enterprise` (Glasstadt) sind als Reserve gedacht.
+- Die Beratungsszene zeigt eine KI-generierte Person, die Besucher für Marcel Wagner halten könnten. Sie wird nicht genutzt.
+- Der alte Laptop-Ausschnitt enthält unleserliche Fantasietexte. Stattdessen bleibt der HTML-Status-Mock in der Praxis-Sektion.
+- Die prozeduralen Grafiken (`tools/art`) werden nicht mehr verwendet.
 
 ## 7. Tests
 
@@ -99,8 +105,8 @@ Ergebnisse vom 19.11.2026:
 
 | Seite | Performance | Accessibility | Best Practices | SEO | LCP | CLS |
 |---|---|---|---|---|---|---|
-| Startseite mobil | 98 | 100 | 100 | 100 | 2,3 s | 0 |
-| Startseite Desktop | 100 | 100 | 100 | 100 | 0,5 s | 0 |
+| Startseite mobil | 99 | 100 | 100 | 100 | 2,0 s | 0 |
+| Startseite Desktop | 100 | 100 | 100 | 100 | 0,7 s | 0 |
 | EN-Startseite und Unterseiten | 98–100 | 100 | 100 | 100 | – | – |
 
 ## 8. Veröffentlichung

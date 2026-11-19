@@ -19,14 +19,18 @@ I = {  # Strichsymbole 24x24
 }
 def ic(n, s=26, cls="ic"): return f'<svg class="{cls}" width="{s}" height="{s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{I[n]}</svg>'
 ARROW = ic("arrow", 18, "")
-PHOTO = {"hero-enterprise": (741, 268), "tech-platform": (742, 268), "ki-chip": (242, 223), "dashboard-laptop": (642, 223), "beratung": (573, 223),
-         "svc-erp": (487, 108), "svc-s4": (480, 108), "svc-dyn": (485, 108), "svc-ora": (487, 110), "svc-cut": (480, 110), "svc-ki": (485, 110)}
+PHOTO = {"svc-erp": (487, 108), "svc-s4": (480, 108), "svc-dyn": (485, 108), "svc-ora": (487, 110), "svc-cut": (480, 110), "svc-ki": (485, 110)}
+BIG = {"hero": 1441 / 2560, "platform": 1707 / 2560, "connect": 1707 / 2560, "dashboard": 1441 / 2560}
 
-def photo(name, alt, r, eager=False):
-    """Bild aus der STEGARC-Bildwelt (assets/photo): WebP mit JPEG-Fallback."""
-    w, h = PHOTO[name]
-    return (f'<picture><source type="image/webp" srcset="{r}assets/photo/{name}.webp">'
-            f'<img src="{r}assets/photo/{name}.jpg" alt="{alt}" width="{w}" height="{h}"'
+def photo(name, alt, r, eager=False, sizes="100vw"):
+    """Bild aus der STEGARC-Bildwelt (assets/photo): WebP, bei großen Motiven mit srcset, JPEG-Fallback."""
+    if name in BIG:
+        ss = ", ".join(f"{r}assets/photo/{name}-{w}.webp {w}w" for w in (960, 1600, 2560))
+        w, h = 1600, round(1600 * BIG[name])
+        src = f'<source type="image/webp" srcset="{ss}" sizes="{sizes}">'
+    else:
+        (w, h), src = PHOTO[name], f'<source type="image/webp" srcset="{r}assets/photo/{name}.webp">'
+    return (f'<picture>{src}<img src="{r}assets/photo/{name}.jpg" alt="{alt}" width="{w}" height="{h}"'
             f'{" fetchpriority=\"high\"" if eager else " loading=\"lazy\""} decoding="async"></picture>')
 
 def appmock(t):
@@ -61,7 +65,7 @@ def page(L, r):
     h2 = "".join(f"<span>{x}</span>" for x in t["tech_h"])
     return f'''<!--META {json.dumps(t["meta"], ensure_ascii=False)}-->
 <section class="hero" aria-labelledby="hero-h">
-  <div class="art" aria-hidden="true">{photo("hero-enterprise", "", r, eager=True)}</div>
+  <div class="art" aria-hidden="true">{photo("hero", "", r, eager=True)}</div>
   <div class="wrap">
     <div class="copy">
       <div class="eyebrow">{t["eyebrow"]}</div>
@@ -90,7 +94,7 @@ def page(L, r):
 </section>
 
 <section class="section dark tech" id="{a["platform"]}" aria-labelledby="tech-h">
-  <div class="bgart" aria-hidden="true">{photo("tech-platform", "", r)}</div>
+  <div class="bgart" aria-hidden="true">{photo("platform", "", r)}</div>
   <div class="wrap">
     <div class="grid">
       <div class="reveal">
@@ -108,7 +112,7 @@ def page(L, r):
 <section class="section dark" id="{a["ai"]}" aria-labelledby="ai-h" style="padding-top:0">
   <div class="wrap split">
     <div class="reveal"><div class="eyebrow">{t["ai_eyebrow"]}</div><h2 id="ai-h">{t["ai_h"]}</h2><p class="intro">{t["ai_p"]}</p><ul class="uses">{uses}</ul></div>
-    <div class="kiside reveal"><figure class="chip">{photo("ki-chip", "", r)}</figure><div class="card approve" role="group" aria-label="{t["ap_label"]}">
+    <div class="kiside reveal"><figure class="dash">{photo("dashboard", t["dash_alt"], r, sizes="(max-width:960px) 92vw, 600px")}</figure><div class="card approve" role="group" aria-label="{t["ap_label"]}">
       <div class="msg"><b>{t["ap_h"]}</b>{t["ap_msg"]}</div>
       <dl>{"".join(f"<dt>{k}</dt><dd>{v}</dd>" for k, v in t["ap_dl"])}</dl>
       <div class="acts" aria-hidden="true"><span class="yes">{t["ap_yes"]}</span><span>{t["ap_no"]}</span></div>
@@ -168,7 +172,8 @@ def page(L, r):
   <script type="application/ld+json">{faqld}</script>
 </section>
 
-<section class="section dark" id="{a["contact"]}" aria-labelledby="ct-h">
+<section class="section dark contactsec" id="{a["contact"]}" aria-labelledby="ct-h">
+  <div class="bgart" aria-hidden="true">{photo("connect", "", r)}</div>
   <div class="wrap contact">
     <div class="reveal"><div class="eyebrow">{t["ct_eyebrow"]}</div><h2 id="ct-h">{t["ct_h"]}</h2><p class="intro">{t["ct_p"]}</p>
       <div class="cta"><a class="btn btn-primary" href="mailto:marcel.wagner@w-dfs.de?subject={t["ct_subj"]}">{t["ct_mail"]} {ARROW}</a><a class="btn btn-secondary" href="tel:+491791600252">{t["ct_call"]}</a></div></div>
@@ -314,7 +319,7 @@ EN = dict(lang="en", meta={"type": "home", "title": "ERP transformation, custom 
   ct_dl=[("Name", "Marcel Wagner"), ("E-mail", '<a href="mailto:marcel.wagner@w-dfs.de">marcel.wagner@w-dfs.de</a>'), ("Mobile", '<a href="tel:+491791600252">+49 179 1600252</a>'), ("Address", "Eichendorffstr. 38, 75031 Eppingen, Germany")])
 
 
-DE.update(
+DE.update(dash_alt="Illustration: Laptop mit einem Dashboard aus Diagrammen, daneben Symbole für Daten, Cloud und KI", 
   lead2="Herstellerunabhängige ERP-Transformation, komplexe Systemlandschaften, Datenintegration, Cutover und produktive KI-Lösungen – mit Erfahrung, Umsetzungskraft und messbaren Ergebnissen.",
   cta2="Leistungen ansehen",
   svc2=[("cube", "card-erp", "ERP-Transformation", "Strategie, Zielbild, Architektur und Umsetzung.", ("blog/rise-with-sap-oder-alternativen.html", "RISE oder Alternativen?")),
@@ -331,7 +336,7 @@ DE.update(
             rows=[("S/4HANA", 85), ("Microsoft Dynamics", 79), ("Oracle", 90), ("Cutover", 80)], cap="Konzeptdarstellung mit Beispielwerten"),
   tech_eyebrow="STEGARC Technology", tech_h=["Eine Plattform.", "Alle Systeme.", "Volle Kontrolle."],
   pj_p2="Über 20 Jahre Programme in DAX-Konzernen und international tätigen Unternehmen – strukturiertes Vorgehen, starke Umsetzung und messbarer Nutzen, von der Konzeption bis zum Go-live. Und Sonderfälle im Mittelstand, für die es keine Standardantwort gab.")
-EN.update(
+EN.update(dash_alt="Illustration: laptop showing a dashboard of charts, next to symbols for data, cloud and AI", 
   lead2="Vendor-independent ERP transformation, complex system landscapes, data integration, cutover and productive AI solutions – with experience, delivery strength and measurable results.",
   cta2="See services",
   svc2=[("cube", "card-erp", "ERP transformation", "Strategy, target picture, architecture and delivery.", ("blog/rise-with-sap-or-alternatives.html", "RISE or alternatives?")),

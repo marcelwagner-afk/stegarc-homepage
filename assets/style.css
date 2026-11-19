@@ -183,8 +183,8 @@ p{margin:0}
 
 /* ---------- STEGARC Technology (dunkel) ---------- */
 .tech{overflow:hidden}
-.tech .bgart{position:absolute;inset:0;pointer-events:none;opacity:.5;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 45%);mask-image:linear-gradient(90deg,transparent 0,#000 45%)}
-.tech .bgart img{width:100%;height:100%;object-fit:cover;object-position:center}
+.tech .bgart,.contactsec .bgart{position:absolute;inset:0;pointer-events:none;opacity:.5;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 45%);mask-image:linear-gradient(90deg,transparent 0,#000 45%)}
+.tech .bgart img,.contactsec .bgart img{width:100%;height:100%;object-fit:cover;object-position:center}
 .tech .wrap{position:relative}
 .tech .grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:var(--s6);align-items:center}
 .tech h2{font-size:clamp(36px,3.6vw + .5rem,60px);letter-spacing:-.035em;line-height:1.02}
@@ -205,10 +205,8 @@ p{margin:0}
 .uses{list-style:none;margin:var(--s4) 0 0;padding:0;display:grid;gap:var(--s2)}
 .uses li{display:flex;gap:12px}.uses li svg{color:var(--teal);flex:none;margin-top:4px}
 .kiside{display:flex;flex-direction:column;gap:var(--s3)}
-.kiside{position:relative}.kiside .chip{position:absolute;top:-28px;right:-12px;width:210px;margin:0;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line-dark);box-shadow:0 24px 48px -20px rgba(0,184,176,.35);z-index:2}
-.kiside .chip img{display:block;width:100%;height:auto}
-.kiside .approve{margin-top:150px;padding-right:var(--s4)}
-@media (max-width:960px){.kiside .chip{position:static;width:180px}.kiside .approve{margin-top:0}}
+.kiside .dash{margin:0;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line-dark);aspect-ratio:16/8;background:var(--navy)}
+.kiside .dash img{width:100%;height:100%;object-fit:cover;object-position:center 60%}
 .approve{padding:var(--s4);display:flex;flex-direction:column;gap:var(--s2)}
 .approve .msg{background:rgba(0,184,176,.1);border:1px solid rgba(0,184,176,.25);border-radius:var(--r-md);padding:var(--s2) 18px;font-size:15.5px;color:var(--on-dark)}
 .approve .msg b{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:6px}
@@ -342,3 +340,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px var(--s4);align-items:center}
 footer .brand{font-size:18px;margin-right:var(--s2)}
 footer nav{display:flex;gap:var(--s3);margin-left:auto;flex-wrap:wrap}
 footer a{color:var(--ink-2);text-decoration:none}footer a:hover{color:var(--teal-ink)}
+
+.contactsec{position:relative;overflow:hidden}.contactsec .bgart{opacity:.32}.contactsec .wrap{position:relative}
+.tech .bgart::after,.contactsec .bgart::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,var(--navy) 0,rgba(7,21,43,0) 28%),linear-gradient(180deg,var(--navy) 0,rgba(7,21,43,0) 18%)}
+.contactsec .bgart{opacity:.24}
