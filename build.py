@@ -22,7 +22,7 @@ LOGO = ('<svg width="30" height="30" viewBox="0 0 40 40" aria-hidden="true"><def
 MON = {"de": ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
        "en": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]}
 T = {
-    "de": {"nav": [("#leistungen", "Leistungen"), ("#vorgehen", "Vorgehen"), ("#projekte", "Projekte"), ("#plattform", "STEGARC"), ("#ueber", "Über mich")],
+    "de": {"nav": [("#leistungen", "Leistungen"), ("#plattform", "Plattform"), ("#vorgehen", "Vorgehen"), ("#projekte", "Erfahrung"), ("#ueber", "Über mich")],
            "contact": "Kontakt", "anchor": "kontakt", "skip": "Zum Inhalt springen", "home": "Startseite",
            "legal": [("impressum.html", "Impressum"), ("datenschutz.html", "Datenschutz")],
            "blog_title": "Blog – SAP-Transformation, KI und Sonderlösungen",
@@ -31,7 +31,7 @@ T = {
            "read": "Min. Lesezeit", "by": "von Marcel Wagner", "more": "Weiterlesen", "related": "Weitere Beiträge", "updated": "aktualisiert",
            "cta_h": "Sie stehen vor einer ähnlichen Entscheidung?", "cta_p": "Schildern Sie kurz Ihre Ausgangslage – ich melde mich mit einem Vorschlag für ein erstes Gespräch.",
            "cta_b": "Gespräch vereinbaren", "menu_open": "Menü öffnen", "menu_close": "Menü schließen", "nav_label": "Hauptnavigation", "legal_label": "Rechtliches", "date": lambda d: f"{int(d[8:10])}. {MON['de'][int(d[5:7]) - 1]} {d[:4]}", "locale": "de_DE"},
-    "en": {"nav": [("#services", "Services"), ("#approach", "Approach"), ("#projects", "Projects"), ("#platform", "STEGARC"), ("#about", "About me")],
+    "en": {"nav": [("#services", "Capabilities"), ("#platform", "Platform"), ("#approach", "Approach"), ("#projects", "Experience"), ("#about", "About")],
            "contact": "Contact", "anchor": "contact", "skip": "Skip to content", "home": "Home",
            "legal": [("legal-notice.html", "Legal notice"), ("privacy.html", "Privacy")],
            "blog_title": "Blog – SAP transformation, AI and custom solutions",
@@ -160,7 +160,7 @@ def main():
         t = T[l]; out = "blog/index.html" if l == "de" else "en/blog/index.html"
         cards = "".join(card(l, rp, m, "../") for o, rp, m in posts[l])
         body = (f'<section class="sec page-head"><div class="wrap"><div class="head"><h1>Blog</h1><p class="intro">{t["blog_lead"]}</p></div>'
-                f'<ul class="posts">{cards}</ul></div></section>')
+                f'<h2 class="sr">{"Alle Beiträge" if l == "de" else "All articles"}</h2><ul class="posts">{cards}</ul></div></section>')
         pages.append((l, out, "blog/index.html", {"title": t["blog_title"], "description": t["blog_desc"], "alt": "en/blog/index.html" if l == "de" else "blog/index.html"}, body))
     sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">']
     for lang, out, rp, m, b in pages:

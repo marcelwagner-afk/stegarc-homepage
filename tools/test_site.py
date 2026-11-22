@@ -12,7 +12,7 @@ from playwright.sync_api import sync_playwright
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 PAGES = sorted(str(p.relative_to(ROOT)) for p in ROOT.rglob("*.html")
                if not any(x in p.parts for x in ("tools", "content", "node_modules", ".git")))
-WIDTHS = [1920, 1440, 1024, 768, 390, 375]
+WIDTHS = [1920, 1440, 1024, 768, 430, 390, 375]
 fails = []
 
 def fail(msg):
@@ -76,6 +76,11 @@ def run(pw, name, base):
             page.set_viewport_size({"width": w, "height": 900})
             sw = page.evaluate("document.documentElement.scrollWidth")
             if sw > w: fail(f"{lang} @{w}: horizontaler Scroll ({sw}px)")
+            wide = page.evaluate("""[...document.querySelectorAll('h1,h2,h3,p,li,a.btn,table')].filter(e=>{const r=e.getBoundingClientRect();return r.width&&r.right>innerWidth+1&&!e.closest('[aria-hidden=true]')}).map(e=>e.tagName+':'+e.textContent.trim().slice(0,30))""")
+            if wide: fail(f"{lang} @{w}: Elemente ragen über den Rand {wide[:3]}")
+        # Kontextbezogene CTAs: mailto mit Betreff
+        n = page.evaluate("document.querySelectorAll('a[href^=mailto][href*=subject]').length")
+        if n < 5: fail(f"{lang}: nur {n} mailto-CTAs mit Betreff")
         # Desktop: Navigation, Scroll-Zustand, Scrollspy
         page.set_viewport_size({"width": 1440, "height": 900})
         page.goto(base + start)
