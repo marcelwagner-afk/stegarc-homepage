@@ -12,7 +12,7 @@ Aufruf: python3 build.py   (keine Abhängigkeiten)
 """
 import html, json, pathlib, re
 ROOT = pathlib.Path(__file__).resolve().parent
-BASE = "https://marcelwagner-afk.github.io/stegarc-homepage/"
+BASE = "https://stegarc.com/"
 NAME = "Marcel Wagner – STEGARC"
 _imp = (ROOT / "content" / "de" / "impressum.html").read_text(encoding="utf-8")
 CONTACT = {"email": re.search(r'href="mailto:([^"?]+)', _imp).group(1), "telephone": re.search(r'href="tel:([^"]+)', _imp).group(1)}
